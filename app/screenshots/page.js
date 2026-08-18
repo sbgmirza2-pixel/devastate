@@ -7,36 +7,46 @@ export default function ScreenshotsPage() {
       
       <div className="space-y-4 text-black/80 text-base sm:text-lg leading-relaxed mb-8 text-left" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
         <p>
-          Take a look at the clean interface, streamlined menus, and optimized layouts designed for effortless navigation.
+          Explore the in-game interface, control panels, and interactive elements designed for your device.
         </p>
       </div>
 
-      <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-6" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
+      {/* 4 Images Landscape Grid (2 columns on tablet/desktop) */}
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
         
-        {/* Gaming Screenshot 1 */}
-        <div className="w-full overflow-hidden border border-black/10 shadow-sm transition hover:scale-[1.02] duration-300">
+        {/* Screenshot 1 */}
+        <div className="w-full overflow-hidden rounded-xl border-2 border-black/80 shadow-md transition hover:scale-[1.01] duration-300 bg-white">
           <img 
-            src="https://images.unsplash.com/photo-1542751371-adc38448a05e?auto=format&fit=crop&w=800&q=80" 
-            alt="Gaming Performance" 
-            className="w-full h-auto object-cover aspect-[9/16]"
+            src="/pic4.webp" 
+            alt="Devastate APK Gameplay 1" 
+            className="w-full h-auto object-cover aspect-video"
           />
         </div>
 
-        {/* Gaming Screenshot 2 */}
-        <div className="w-full overflow-hidden border border-black/10 shadow-sm transition hover:scale-[1.02] duration-300">
+        {/* Screenshot 2 */}
+        <div className="w-full overflow-hidden rounded-xl border-2 border-black/80 shadow-md transition hover:scale-[1.01] duration-300 bg-white">
           <img 
-            src="https://images.unsplash.com/photo-1552820728-8b83bb6b773f?auto=format&fit=crop&w=800&q=80" 
-            alt="Game Controls" 
-            className="w-full h-auto object-cover aspect-[9/16]"
+            src="/pic3.webp" 
+            alt="Devastate APK Gameplay 2" 
+            className="w-full h-auto object-cover aspect-video"
           />
         </div>
 
-        {/* Gaming Screenshot 3 - Updated */}
-        <div className="w-full overflow-hidden border border-black/10 shadow-sm transition hover:scale-[1.02] duration-300">
+        {/* Screenshot 3 */}
+        <div className="w-full overflow-hidden rounded-xl border-2 border-black/80 shadow-md transition hover:scale-[1.01] duration-300 bg-white">
           <img 
-            src="https://images.unsplash.com/photo-1534423861386-85a16f5d13fd?q=80&w=870&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-            alt="Game Settings" 
-            className="w-full h-auto object-cover aspect-[9/16]"
+            src="/pic2.webp" 
+            alt="Devastate APK Gameplay 3" 
+            className="w-full h-auto object-cover aspect-video"
+          />
+        </div>
+
+        {/* Screenshot 4 */}
+        <div className="w-full overflow-hidden rounded-xl border-2 border-black/80 shadow-md transition hover:scale-[1.01] duration-300 bg-white">
+          <img 
+            src="/pic1.webp" 
+            alt="Devastate APK Gameplay 4" 
+            className="w-full h-auto object-cover aspect-video"
           />
         </div>
 

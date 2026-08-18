@@ -1,26 +1,61 @@
 export default function FAQsPage() {
   return (
-    <div className="w-full text-left">
-      <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6 tracking-wide uppercase border-b-2 border-black pb-3 text-left" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+    <div className="w-full text-left" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
+      
+      {/* Page Title */}
+      <h2 className="text-3xl sm:text-4xl font-bold text-black mb-6 tracking-wide uppercase border-b-2 border-black pb-3" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
         Frequently Asked Questions
       </h2>
       
-      <div className="space-y-6 text-black/80 text-base sm:text-lg leading-relaxed text-left" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
-        <div className="border-b border-black/20 pb-4">
-          <h3 className="text-lg font-bold text-black mb-1">Is Devastate APK safe to use?</h3>
-          <p className="text-black/80 text-base">Yes, the application is thoroughly tested and optimized to ensure safe and stable execution on compatible Android devices.</p>
+      <p className="text-black/80 text-base sm:text-lg leading-relaxed mb-8">
+        Got questions about Devastate APK? Find clear answers to the most common queries below.
+      </p>
+
+      {/* FAQs List without Borders */}
+      <div className="space-y-6">
+        
+        {/* FAQ 1 */}
+        <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm">
+          <h3 className="text-lg font-extrabold text-black mb-2 uppercase tracking-wide">
+            Is Devastate APK safe to install on my Android device?
+          </h3>
+          <p className="text-black/80 text-base leading-relaxed">
+            Yes! The package is thoroughly scanned and optimized to run smoothly on compatible Android configurations without compromising your device security.
+          </p>
         </div>
 
-        <div className="border-b border-black/20 pb-4">
-          <h3 className="text-lg font-bold text-black mb-1">Do I need root access?</h3>
-          <p className="text-black/80 text-base">No root access is required to use standard features and layout adjustments.</p>
+        {/* FAQ 2 */}
+        <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm">
+          <h3 className="text-lg font-extrabold text-black mb-2 uppercase tracking-wide">
+            Do I need to root my phone to run this APK?
+          </h3>
+          <p className="text-black/80 text-base leading-relaxed">
+            No rooting is required. Devastate APK installs and runs normally like any other standard application on standard Android operating systems.
+          </p>
         </div>
 
-        <div className="border-b border-black/20 pb-4">
-          <h3 className="text-lg font-bold text-black mb-1">How do I update the application?</h3>
-          <p className="text-black/80 text-base">You can check the "What's New" section or visit the download page periodically to grab the latest release version.</p>
+        {/* FAQ 3 */}
+        <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm">
+          <h3 className="text-lg font-extrabold text-black mb-2 uppercase tracking-wide">
+            How do I update to the latest version?
+          </h3>
+          <p className="text-black/80 text-base leading-relaxed">
+            When a new update is released, you can visit our download page again to grab the latest APK build and install it over your existing version.
+          </p>
         </div>
+
+        {/* FAQ 4 */}
+        <div className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm">
+          <h3 className="text-lg font-extrabold text-black mb-2 uppercase tracking-wide">
+            What should I do if the installation says "App not installed"?
+          </h3>
+          <p className="text-black/80 text-base leading-relaxed">
+            This usually happens if an older conflicting version is already present on your device, or if unknown sources aren't fully allowed. Try uninstalling the previous build and reinstalling the new package.
+          </p>
+        </div>
+
       </div>
+
     </div>
   );
 }
