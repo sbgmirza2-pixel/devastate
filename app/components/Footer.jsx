@@ -9,13 +9,14 @@ export default function Footer() {
         {/* Column 1: Brand Info with Circular Logo */}
         <div className="space-y-4">
           <div className="flex items-center gap-3">
-            {/* Logo Wrapper - Changed 'rounded' to 'rounded-full border' */}
-            <div className="relative w-12 h-12 overflow-hidden rounded-full border-2 border-white/20 shadow-inner bg-[#1F1F1F] flex items-center justify-center p-0.5">
+            {/* Logo Wrapper */}
+            <div className="relative w-12 h-12 overflow-hidden rounded-full border-2 border-white/20 shadow-inner bg-[#1F1F1F] flex items-center justify-center p-0.5 shrink-0">
               <Image 
                 src="/Devastate-fav-icon.webp" 
                 alt="Devastate Logo" 
-                fill 
-                className="object-contain" // Use 'contain' if logo has empty space, 'cover' if it fills image
+                width={44}
+                height={44}
+                className="object-contain rounded-full"
               />
             </div>
             <span className="text-white font-extrabold text-lg tracking-wider uppercase" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
@@ -30,7 +31,7 @@ export default function Footer() {
         {/* Column 2: Legal Links */}
         <div>
           <h4 className="text-white font-extrabold text-xs uppercase tracking-widest mb-4">
-            Legal
+            Legal & Pages
           </h4>
           <ul className="space-y-2.5 text-sm">
             <li>
@@ -40,10 +41,16 @@ export default function Footer() {
               <Link href="/contact" className="hover:text-white transition">Contact Us</Link>
             </li>
             <li>
-              <Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link>
+              <Link href="/privacy-policy" className="hover:text-white transition">Privacy Policy</Link>
             </li>
             <li>
               <Link href="/terms" className="hover:text-white transition">Terms & Conditions</Link>
+            </li>
+            <li>
+              <Link href="/disclaimer" className="hover:text-white transition">Disclaimer</Link>
+            </li>
+            <li>
+              <Link href="/dmca" className="hover:text-white transition">DMCA Policy</Link>
             </li>
           </ul>
         </div>

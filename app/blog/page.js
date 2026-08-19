@@ -1,35 +1,7 @@
-export default function BlogPage() {
-  // Dummy blog posts data (Aap isko apne backend ya CMS se bhi connect kar sakti hain)
-  const posts = [
-    {
-      id: 1,
-      title: "Optimizing Devastate APK for Low-End Android Devices",
-      excerpt: "Discover the best performance configurations and cache management techniques to make the app run smoothly on any smartphone.",
-      date: "August 16, 2026",
-      readTime: "4 min read",
-      category: "Performance",
-      slug: "optimizing-devastate-apk-low-end-devices"
-    },
-    {
-      id: 2,
-      title: "Understanding Android Sideloading & Security Protocols",
-      excerpt: "Everything you need to know about unknown sources, APK verification, and safe installation practices on modern Android versions.",
-      date: "August 10, 2026",
-      readTime: "6 min read",
-      category: "Security",
-      slug: "understanding-android-sideloading-security"
-    },
-    {
-      id: 3,
-      title: "What's New in Devastate Version 2.4.0 Release",
-      excerpt: "A complete walkthrough of the latest feature updates, UI enhancements, bug fixes, and architecture improvements.",
-      date: "August 02, 2026",
-      readTime: "3 min read",
-      category: "Updates",
-      slug: "whats-new-in-devastate-v2-4-0"
-    }
-  ];
+import Link from 'next/link';
+import { blogsList } from '@/data/blogData';
 
+export default function BlogPage() {
   return (
     <div className="w-full max-w-4xl mx-auto px-4 py-8 flex flex-col items-center text-left" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
       
@@ -39,12 +11,12 @@ export default function BlogPage() {
       </h2>
       
       <p className="text-black/80 text-base sm:text-lg leading-relaxed mb-10 text-center max-w-xl">
-        Stay updated with the latest tips, patch notes, guides, and technical breakdowns for Devastate APK.
+        Stay updated with the latest tips, guides, security checks, and technical breakdowns for Devastate APK.
       </p>
 
       {/* Blog Cards List */}
       <div className="w-full space-y-6">
-        {posts.map((post) => (
+        {blogsList.map((post) => (
           <article 
             key={post.id} 
             className="bg-white p-6 sm:p-8 rounded-2xl shadow-sm transition hover:shadow-md border border-black/5 flex flex-col justify-between"
@@ -60,9 +32,9 @@ export default function BlogPage() {
 
               {/* Title */}
               <h3 className="text-xl sm:text-2xl font-extrabold text-black mb-3 hover:text-black/80 transition">
-                <a href={`/blog/${post.slug}`}>
+                <Link href={`/blog/${post.slug}`}>
                   {post.title}
-                </a>
+                </Link>
               </h3>
 
               {/* Excerpt */}
@@ -73,12 +45,12 @@ export default function BlogPage() {
 
             {/* Read More Link */}
             <div>
-              <a 
+              <Link 
                 href={`/blog/${post.slug}`} 
                 className="inline-flex items-center text-black font-extrabold text-sm uppercase tracking-wider hover:underline"
               >
                 Read Article &rarr;
-              </a>
+              </Link>
             </div>
           </article>
         ))}

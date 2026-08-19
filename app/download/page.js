@@ -7,18 +7,40 @@ export default function DownloadPage() {
   const [timeLeft, setTimeLeft] = useState(10);
   const [downloadComplete, setDownloadComplete] = useState(false);
 
-  const startDownload = () => {
+  const startDownload = async () => {
     setIsDownloading(true);
     setDownloadComplete(false);
     setProgress(0);
     setTimeLeft(10);
 
+    // 1. Backend API ko call karein taake download database mein track ho jaye
+    try {
+      await fetch('http://localhost:5000/api/apk/track-download', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+    } catch (error) {
+      console.error('Failed to track download:', error);
+    }
+
+    // 2. Simulated Progress Bar & Download Logic
     const interval = setInterval(() => {
       setProgress((prev) => {
         if (prev >= 100) {
           clearInterval(interval);
           setIsDownloading(false);
           setDownloadComplete(true);
+
+          // Optional: Real file download trigger
+          const link = document.createElement('a');
+          link.href = '/devastate-game.apk'; // Make sure your APK is in the public folder
+          link.download = 'Devastate.apk';
+          document.body.appendChild(link);
+          link.click();
+          document.body.removeChild(link);
+
           return 100;
         }
         return prev + 10;
