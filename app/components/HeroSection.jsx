@@ -12,7 +12,7 @@ export default function HeroSection() {
     <div className="w-full mb-12 flex flex-col items-center text-center">
       
       {/* Centered Heading */}
-      <h1 className="text-4xl sm:text-6xl font-black text-black mb-2 uppercase leading-tight">
+      <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold text-gray-900 mb-3 tracking-tight leading-tight">
         {apk.appName || 'Devastate'} APK 
       </h1>
 

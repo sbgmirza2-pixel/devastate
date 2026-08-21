@@ -4,10 +4,6 @@ import { readData, writeData, formatBytes } from '@/lib/dataUtils';
 import { writeFile, mkdir } from 'fs/promises';
 import path from 'path';
 
-export const config = {
-  api: { bodyParser: false },
-};
-
 // POST /api/apk/upload — admin-only, upload APK file and auto-detect size
 export async function POST(request) {
   const authed = await isAuthenticated();
