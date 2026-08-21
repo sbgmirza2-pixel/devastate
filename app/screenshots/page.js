@@ -19,7 +19,7 @@ export default function ScreenshotsPage() {
           {/* Screenshot 1 */}
           <div className="w-[300px] sm:w-[450px] flex-shrink-0 overflow-hidden rounded-xl border-2 border-black/80 shadow-md transition hover:scale-[1.01] duration-300 bg-white">
             <img 
-              src="/pic4.webp" 
+              src="/pic2.webp" 
               alt="Devastate APK Gameplay 1" 
               className="w-full h-auto object-cover aspect-video"
             />
@@ -28,7 +28,7 @@ export default function ScreenshotsPage() {
           {/* Screenshot 2 */}
           <div className="w-[300px] sm:w-[450px] flex-shrink-0 overflow-hidden rounded-xl border-2 border-black/80 shadow-md transition hover:scale-[1.01] duration-300 bg-white">
             <img 
-              src="/pic3.webp" 
+              src="/pic1.webp" 
               alt="Devastate APK Gameplay 2" 
               className="w-full h-auto object-cover aspect-video"
             />
@@ -37,7 +37,7 @@ export default function ScreenshotsPage() {
           {/* Screenshot 3 */}
           <div className="w-[300px] sm:w-[450px] flex-shrink-0 overflow-hidden rounded-xl border-2 border-black/80 shadow-md transition hover:scale-[1.01] duration-300 bg-white">
             <img 
-              src="/pic2.webp" 
+              src="/pic4.webp" 
               alt="Devastate APK Gameplay 3" 
               className="w-full h-auto object-cover aspect-video"
             />
@@ -46,7 +46,7 @@ export default function ScreenshotsPage() {
           {/* Screenshot 4 */}
           <div className="w-[300px] sm:w-[450px] flex-shrink-0 overflow-hidden rounded-xl border-2 border-black/80 shadow-md transition hover:scale-[1.01] duration-300 bg-white">
             <img 
-              src="/pic1.webp" 
+              src="/pic3.webp" 
               alt="Devastate APK Gameplay 4" 
               className="w-full h-auto object-cover aspect-video"
             />

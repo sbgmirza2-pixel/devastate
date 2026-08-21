@@ -18,12 +18,12 @@ export default function HeroSection() {
     <div className="w-full mb-12 flex flex-col items-center text-center">
       
       {/* Centered Heading */}
-      <h1 className="text-4xl sm:text-6xl font-black text-black mb-6  uppercase leading-tight">
+      <h1 className="text-4xl sm:text-6xl font-black text-black mb-2  uppercase leading-tight">
         Devastate APK 
       </h1>
 
       {/* Center-Aligned Descriptive Paragraphs with Max-Width for Clean Reading */}
-      <div className="w-full max-w-3xl mx-auto flex flex-col items-center space-y-4 text-base sm:text-lg text-black/90 leading-relaxed font-normal mb-8">
+      <div className="w-full max-w-3xl mx-auto flex flex-col items-center space-y-2 text-base sm:text-lg text-black/90 leading-relaxed font-normal mb-4">
         <p>
           Devastate offers a refreshing change from typical action and arcade games, mixing anime-inspired 2D artwork with character interactions, engaging dialogue, mystery, daily activities, useful items, rewards and plenty of customization.
         </p>
