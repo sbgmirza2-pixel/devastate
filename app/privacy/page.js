@@ -9,7 +9,7 @@ export default function PrivacyPolicyPage() {
       
       {/* Main Heading */}
       <h1
-        className="text-4xl sm:text-5xl font-bold text-black uppercase mb-8"
+        className="text-4xl sm:text-5xl font-bold text-black uppercase mb-8 tracking-tight"
         style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
       >
         Privacy Policy
@@ -36,7 +36,7 @@ export default function PrivacyPolicyPage() {
           >
             Information We Collect
           </h2>
-          <ul className="space-y-3 text-sm sm:text-base font-medium">
+          <ul className="space-y-3 text-sm sm:text-base font-medium pl-4">
             <li className="flex items-start gap-2">
               <span className="text-black font-bold">•</span>
               <span>We do not ask visitors to provide personal information just to browse the website.</span>
@@ -104,7 +104,7 @@ export default function PrivacyPolicyPage() {
         </section>
 
         {/* Policy Changes */}
-        <section className="space-y-4">
+        <section className="space-y-4 border-t border-black/10 pt-8">
           <h2
             className="text-xl sm:text-2xl font-bold text-black uppercase"
             style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
@@ -121,16 +121,16 @@ export default function PrivacyPolicyPage() {
       {/* Quick Links */}
       <div className="flex flex-wrap gap-4 pt-10 mt-16 border-t border-black/10">
         <Link 
-          href="/contact" 
-          className="border-2 border-black bg-black text-white hover:bg-black/90 font-extrabold text-xs tracking-wider px-6 py-3 rounded-xl transition uppercase shadow-sm"
-        >
-          Contact Us
-        </Link>
-        <Link 
           href="/" 
           className="border-2 border-black bg-black text-white hover:bg-black/90 font-extrabold text-xs tracking-wider px-6 py-3 rounded-xl transition uppercase shadow-sm"
         >
           Home Page
+        </Link>
+        <Link 
+          href="/contact" 
+          className="border-2 border-black bg-black text-white hover:bg-black/90 font-extrabold text-xs tracking-wider px-6 py-3 rounded-xl transition uppercase shadow-sm"
+        >
+          Contact Us
         </Link>
       </div>
 

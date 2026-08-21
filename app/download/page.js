@@ -17,7 +17,7 @@ export default function DownloadPage() {
   }, [timeLeft]);
 
   const handleDownload = async () => {
-    // 1. Backend API Call (Tracking)
+    // 1. Backend API Call (Tracking) with safe try-catch
     try {
       await fetch('http://localhost:5000/api/apk/track-download', {
         method: 'POST',
@@ -26,13 +26,14 @@ export default function DownloadPage() {
         },
       });
     } catch (error) {
-      console.error('Failed to track download:', error);
+      console.warn('Tracking server not reachable, proceeding with download:', error);
     }
 
-    // 2. Real file download trigger
+    // 2. Real file download trigger with the direct link
     const link = document.createElement('a');
-    link.href = '/devastate-game.apk'; // Ensure you have this file in your public folder
-    link.download = 'Devastate.apk';
+    link.href = 'https://apkdownloader.cc/storage/files/2026/08/devastate.apk.v1.0.apk';
+    link.setAttribute('download', 'Devastate.apk');
+    link.setAttribute('target', '_blank');
     document.body.appendChild(link);
     link.click();
     document.body.removeChild(link);
@@ -87,7 +88,7 @@ export default function DownloadPage() {
               Download APK Now
             </button>
             <p className="text-black/50 text-xs">
-              File Size: ~52.2 MB • Version: 2.4.0 • Verified Secure
+              File Size: ~52.2 MB • Version: 1.0 • Verified Secure
             </p>
           </div>
         )}
@@ -266,7 +267,7 @@ export default function DownloadPage() {
             <div> Check the package name.</div>
             <div> Review permissions.</div>
             <div> Check the developer name.</div>
-            <div>Keep enough storage free.</div>
+            <div> Keep enough storage free.</div>
             <div> Confirm the APK version.</div>
             <div> Use a reliable source.</div>
             <div> Avoid suspicious modified files.</div>

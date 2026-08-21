@@ -18,7 +18,7 @@ export default function HeroSection() {
     <div className="w-full mb-12 flex flex-col items-center text-center">
       
       {/* Centered Heading */}
-      <h1 className="text-4xl sm:text-6xl font-black text-black mb-6 weight-900 uppercase leading-tight">
+      <h1 className="text-4xl sm:text-6xl font-black text-black mb-6  uppercase leading-tight">
         Devastate APK 
       </h1>
 
