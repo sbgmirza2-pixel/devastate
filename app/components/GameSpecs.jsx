@@ -1,14 +1,30 @@
+import { readData } from '@/lib/dataUtils';
+
 export default function AppInfoWithTableOfContents() {
+  let apk = {
+    appName: "Devastate",
+    version: "1.0",
+    category: "Simulation",
+    packageName: "com.devastate.android",
+    size: "52.21 MB",
+    androidRequired: "Android 6.0 or higher",
+    mainUse: "Anime-style character and story simulation",
+    devices: "Android phones, tablets, and PC via emulator if preferred",
+  };
+  try {
+    apk = readData('apkData.json');
+  } catch {}
+
   const specs = [
-    { label: "APP NAME", value: "Devastate" },
-    { label: "VERSION", value: "1.0" },
-    { label: "APP TYPE", value: "Simulation game" },
-    { label: "CATEGORY", value: "Simulation" },
-    { label: "PACKAGE NAME", value: "com.devastate.android" },
-    { label: "SIZE", value: "52.21 MB" },
-    { label: "REQUIRED ANDROID OS", value: "Android 6.0 or higher" },
-    { label: "MAIN USE", value: "Anime-style character and story simulation" },
-    { label: "DEVICES", value: "Android phones, tablets, and PC via emulator if preferred" },
+    { label: "APP NAME", value: apk.appName || "Devastate" },
+    { label: "VERSION", value: apk.version || "1.0" },
+    { label: "APP TYPE", value: `${apk.category || "Simulation"} game` },
+    { label: "CATEGORY", value: apk.category || "Simulation" },
+    { label: "PACKAGE NAME", value: apk.packageName || "com.devastate.android" },
+    { label: "SIZE", value: apk.size || "52.21 MB" },
+    { label: "REQUIRED ANDROID OS", value: apk.androidRequired || "Android 6.0 or higher" },
+    { label: "MAIN USE", value: apk.mainUse || "Anime-style character and story simulation" },
+    { label: "DEVICES", value: apk.devices || "Android phones, tablets, and PC via emulator if preferred" },
   ];
 
   const tableOfContents = [

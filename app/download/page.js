@@ -5,6 +5,27 @@ import Link from 'next/link';
 export default function DownloadPage() {
   const [timeLeft, setTimeLeft] = useState(10);
   const [isReady, setIsReady] = useState(false);
+  const [apk, setApk] = useState({
+    appName: 'Devastate',
+    version: '1.0',
+    size: '52.2 MB',
+    downloadUrl: 'https://apkdownloader.cc/storage/files/2026/08/devastate.apk.v1.0.apk',
+    packageName: 'com.devastate.android',
+    androidRequired: '6.0 or newer',
+    architecture: 'Universal',
+    developer: 'Devastate DEV',
+  });
+
+  useEffect(() => {
+    fetch('/api/apk')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && !data.error) {
+          setApk(data);
+        }
+      })
+      .catch(() => {});
+  }, []);
 
   // Page par aate hi timer automatically start ho jayega
   useEffect(() => {
@@ -17,22 +38,23 @@ export default function DownloadPage() {
   }, [timeLeft]);
 
   const handleDownload = async () => {
-    // 1. Backend API Call (Tracking) with safe try-catch
+    // 1. Next.js Backend API Call (Tracking)
     try {
-      await fetch('http://localhost:5000/api/apk/track-download', {
+      await fetch('/api/apk/track-download', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
       });
     } catch (error) {
-      console.warn('Tracking server not reachable, proceeding with download:', error);
+      console.warn('Tracking server error:', error);
     }
 
-    // 2. Real file download trigger with the direct link
+    // 2. Real file download trigger with the dynamic link
+    const targetUrl = apk.downloadUrl || 'https://apkdownloader.cc/storage/files/2026/08/devastate.apk.v1.0.apk';
     const link = document.createElement('a');
-    link.href = 'https://apkdownloader.cc/storage/files/2026/08/devastate.apk.v1.0.apk';
-    link.setAttribute('download', 'Devastate.apk');
+    link.href = targetUrl;
+    link.setAttribute('download', `${apk.appName || 'Devastate'}.apk`);
     link.setAttribute('target', '_blank');
     document.body.appendChild(link);
     link.click();
@@ -149,7 +171,7 @@ export default function DownloadPage() {
             className="text-xl sm:text-2xl font-bold text-black uppercase"
             style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
           >
-            Devastate APK Details
+            {apk.appName || 'Devastate'} APK Details
           </h2>
           <div className="overflow-x-auto border border-black/10 rounded-xl">
             <table className="w-full text-left border-collapse text-xs sm:text-sm">
@@ -162,27 +184,27 @@ export default function DownloadPage() {
               <tbody className="divide-y divide-black/10 font-medium">
                 <tr>
                   <td className="p-3">App Name</td>
-                  <td className="p-3">Devastate</td>
+                  <td className="p-3">{apk.appName || 'Devastate'}</td>
                 </tr>
                 <tr>
                   <td className="p-3">Package Name</td>
-                  <td className="p-3">com.devastate.android</td>
+                  <td className="p-3">{apk.packageName || 'com.devastate.android'}</td>
                 </tr>
                 <tr>
                   <td className="p-3">APK Size</td>
-                  <td className="p-3">About 52.2 MB</td>
+                  <td className="p-3">{apk.size || 'About 52.2 MB'}</td>
                 </tr>
                 <tr>
                   <td className="p-3">Android Version</td>
-                  <td className="p-3">6.0 or newer</td>
+                  <td className="p-3">{apk.androidRequired || '6.0 or newer'}</td>
                 </tr>
                 <tr>
                   <td className="p-3">Architecture</td>
-                  <td className="p-3">Universal</td>
+                  <td className="p-3">{apk.architecture || 'Universal'}</td>
                 </tr>
                 <tr>
                   <td className="p-3">Developer</td>
-                  <td className="p-3">Devastate DEV</td>
+                  <td className="p-3">{apk.developer || 'Devastate DEV'}</td>
                 </tr>
               </tbody>
             </table>
