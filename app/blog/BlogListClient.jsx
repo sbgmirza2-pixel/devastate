@@ -31,9 +31,6 @@ export default function BlogListClient({ posts = [] }) {
     });
   }, [posts, selectedCategory, searchQuery]);
 
-  const featuredPost = filteredPosts.length > 0 ? filteredPosts[0] : null;
-  const remainingPosts = filteredPosts.length > 1 ? filteredPosts.slice(1) : [];
-
   return (
     <div className="w-full space-y-10">
       
@@ -55,28 +52,6 @@ export default function BlogListClient({ posts = [] }) {
               {cat}
             </button>
           ))}
-        </div>
-
-        {/* Search input */}
-        <div className="relative w-full md:w-72">
-          <input
-            type="text"
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            placeholder="Search articles..."
-            className="w-full bg-[#F5F3EF] border border-black/10 text-black rounded-xl pl-9 pr-4 py-2 text-xs font-medium focus:outline-none focus:border-black/30 placeholder-black/40"
-          />
-          <span className="absolute left-3 top-1/2 -translate-y-1/2 text-black/40 text-xs">
-            🔍
-          </span>
-          {searchQuery && (
-            <button
-              onClick={() => setSearchQuery('')}
-              className="absolute right-3 top-1/2 -translate-y-1/2 text-black/40 hover:text-black text-xs font-bold"
-            >
-              ✕
-            </button>
-          )}
         </div>
 
       </div>
@@ -102,132 +77,62 @@ export default function BlogListClient({ posts = [] }) {
           </button>
         </div>
       ) : (
-        <>
-          {/* Grand Featured Post (Top post) */}
-          {featuredPost && (
-            <article className="bg-white rounded-3xl overflow-hidden border border-black/10 shadow-sm hover:shadow-md transition-all duration-300 grid grid-cols-1 lg:grid-cols-12 group">
-              
-              {/* Image Column */}
-              <div className="lg:col-span-6 relative aspect-[16/10] lg:aspect-auto overflow-hidden bg-black/5">
-                <img
-                  src={featuredPost.coverImage || '/picblog.webp'}
-                  alt={featuredPost.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-                />
-                <span className="absolute top-4 left-4 bg-black text-white text-[10px] font-bold uppercase tracking-wider px-3 py-1 rounded-full shadow-md">
-                  ⭐ Featured
-                </span>
-              </div>
+        /* All Posts Grid Layout (Same sequence for all blogs) */
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
+          {filteredPosts.map((post) => (
+            <article
+              key={post.id || post.slug}
+              className="bg-white rounded-2xl overflow-hidden border border-black/10 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
+            >
+              <div>
+                {/* Card Thumbnail */}
+                <div className="relative aspect-[16/10] overflow-hidden bg-black/5 border-b border-black/5">
+                  <img
+                    src={post.coverImage || '/picblog.webp'}
+                    alt={post.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <span className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-black text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-black/10">
+                    {post.category}
+                  </span>
+                </div>
 
-              {/* Text Info Column */}
-              <div className="lg:col-span-6 p-6 sm:p-10 flex flex-col justify-between">
-                <div>
-                  <div className="flex items-center gap-3 text-xs font-bold uppercase tracking-wider text-black/50 mb-3">
-                    <span className="bg-black/5 px-3 py-1 rounded-full text-black/80 border border-black/5">
-                      {featuredPost.category}
-                    </span>
-                    {featuredPost.date && (
-                      <span>{featuredPost.date}</span>
-                    )}
-                    <span>&bull;</span>
-                    <span>{featuredPost.readTime || '5 min read'}</span>
+                {/* Content */}
+                <div className="p-6">
+                  <div className="flex items-center gap-2 text-[11px] font-semibold text-black/50 uppercase tracking-wider mb-2">
+                    {post.date && <span>{post.date}</span>}
+                    {post.date && <span>&bull;</span>}
+                    <span>{post.readTime || '5 min read'}</span>
                   </div>
 
-                  <h2
-                    className="text-xl sm:text-3xl font-bold text-gray-900 mb-3 tracking-tight leading-snug group-hover:text-black/80 transition"
+                  <h3
+                    className="text-base sm:text-lg font-bold text-gray-900 mb-2 leading-snug group-hover:text-black/80 transition line-clamp-2"
                     style={{ fontFamily: 'var(--font-heading), sans-serif' }}
                   >
-                    <Link href={`/blog/${featuredPost.slug}`}>
-                      {featuredPost.title}
+                    <Link href={`/blog/${post.slug}`}>
+                      {post.title}
                     </Link>
-                  </h2>
+                  </h3>
 
-                  <p className="text-black/70 text-sm sm:text-base leading-relaxed line-clamp-3 mb-6">
-                    {featuredPost.excerpt}
+                  <p className="text-black/70 text-xs sm:text-sm leading-relaxed line-clamp-3">
+                    {post.excerpt}
                   </p>
                 </div>
+              </div>
 
-                <div className="pt-4 border-t border-black/5 flex items-center justify-between">
-                  <Link
-                    href={`/blog/${featuredPost.slug}`}
-                    className="inline-flex items-center gap-2 bg-black hover:bg-black/90 text-white font-bold text-xs uppercase tracking-wider px-6 py-3 rounded-xl transition shadow-sm"
-                  >
-                    Read Full Article &rarr;
-                  </Link>
-                </div>
+              {/* Footer link */}
+              <div className="p-6 pt-0 flex items-center justify-between border-t border-black/5 mt-4">
+                <Link
+                  href={`/blog/${post.slug}`}
+                  className="inline-flex items-center gap-1 text-black font-bold text-xs uppercase tracking-wider hover:underline"
+                >
+                  Read Article &rarr;
+                </Link>
               </div>
 
             </article>
-          )}
-
-          {/* Remaining Posts Grid */}
-          {remainingPosts.length > 0 && (
-            <div>
-              <h2
-                className="text-xl sm:text-2xl font-bold text-gray-900 tracking-tight mb-6 border-b border-black/10 pb-3"
-                style={{ fontFamily: 'var(--font-heading), sans-serif' }}
-              >
-                More Articles ({remainingPosts.length})
-              </h2>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-                {remainingPosts.map((post) => (
-                  <article
-                    key={post.id}
-                    className="bg-white rounded-2xl overflow-hidden border border-black/10 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
-                  >
-                    <div>
-                      {/* Card Thumbnail */}
-                      <div className="relative aspect-[16/10] overflow-hidden bg-black/5 border-b border-black/5">
-                        <img
-                          src={post.coverImage || '/picblog.webp'}
-                          alt={post.title}
-                          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                        />
-                        <span className="absolute bottom-3 left-3 bg-white/95 backdrop-blur-sm text-black text-[10px] font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full border border-black/10">
-                          {post.category}
-                        </span>
-                      </div>
-
-                      {/* Content */}
-                      <div className="p-6">
-                        <div className="flex items-center gap-2 text-[11px] font-semibold text-black/50 uppercase tracking-wider mb-2">
-                          {post.date && <span>{post.date}</span>}
-                          {post.date && <span>&bull;</span>}
-                          <span>{post.readTime || '5 min read'}</span>
-                        </div>
-
-                        <h3
-                          className="text-base sm:text-lg font-bold text-gray-900 mb-2 leading-snug group-hover:text-black/80 transition line-clamp-2"
-                          style={{ fontFamily: 'var(--font-heading), sans-serif' }}
-                        >
-                          <Link href={`/blog/${post.slug}`}>
-                            {post.title}
-                          </Link>
-                        </h3>
-
-                        <p className="text-black/70 text-xs sm:text-sm leading-relaxed line-clamp-3">
-                          {post.excerpt}
-                        </p>
-                      </div>
-                    </div>
-
-                    {/* Footer link */}
-                    <div className="p-6 pt-0 flex items-center justify-between border-t border-black/5 mt-4">
-                      <Link
-                        href={`/blog/${post.slug}`}
-                        className="inline-flex items-center gap-1 text-black font-bold text-xs uppercase tracking-wider hover:underline"
-                      >
-                        Read Article &rarr;
-                      </Link>
-                    </div>
-
-                  </article>
-                ))}
-              </div>
-            </div>
-          )}
-        </>
+          ))}
+        </div>
       )}
 
     </div>

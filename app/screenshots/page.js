@@ -12,8 +12,8 @@ export default function ScreenshotsPage() {
         </p>
       </div>
 
-      {/* Horizontally Scrolling Container */}
-      <div className="w-full overflow-x-auto pb-4 pt-2">
+      {/* Horizontally Scrolling Container with Custom Scrollbar */}
+      <div className="w-full overflow-x-auto pb-4 pt-2 [&::-webkit-scrollbar]:h-2 [&::-webkit-scrollbar-track]:bg-transparent [&::-webkit-scrollbar-thumb]:bg-[#f3f4f6] [&::-webkit-scrollbar-thumb]:rounded-full hover:[&::-webkit-scrollbar-thumb]:bg-[#e5e7eb]">
         <div className="flex gap-6 w-max">
           
           {/* Screenshot 1 */}
