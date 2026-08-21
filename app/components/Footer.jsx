@@ -19,7 +19,7 @@ export default function Footer() {
                 className="object-contain rounded-full"
               />
             </div>
-            <span className="text-white font-extrabold text-lg tracking-wider uppercase" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+            <span className="text-white font-extrabold text-lg tracking-wider uppercase" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
               Devastate
             </span>
           </div>
@@ -41,7 +41,7 @@ export default function Footer() {
               <Link href="/contact" className="hover:text-white transition">Contact Us</Link>
             </li>
             <li>
-              <Link href="/privacy-policy" className="hover:text-white transition">Privacy Policy</Link>
+              <Link href="/privacy" className="hover:text-white transition">Privacy Policy</Link>
             </li>
             <li>
               <Link href="/terms" className="hover:text-white transition">Terms & Conditions</Link>

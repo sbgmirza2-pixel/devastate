@@ -1,14 +1,22 @@
+import Link from 'next/link';
+
 export default function DmcaPolicyPage() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
+    <div
+      className="max-w-4xl mx-auto px-6 sm:px-10 py-16"
+      style={{ fontFamily: 'var(--font-roboto), sans-serif' }}
+    >
       
       {/* Main Heading */}
-      <h1 className="text-4xl sm:text-6xl font-normal text-black mb-6 tracking-wide uppercase" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+      <h1
+        className="text-4xl sm:text-5xl font-bold text-black uppercase mb-8"
+        style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+      >
         DMCA Policy
       </h1>
 
-      {/* Intro Paragraphs */}
-      <div className="space-y-6 text-black/80 text-base sm:text-lg leading-relaxed mb-12">
+      {/* Intro Text */}
+      <div className="text-sm sm:text-base leading-7 text-black/80 space-y-6 mb-12">
         <p>
           DevastateAPK.net respects copyright rights and takes genuine copyright concerns seriously.
         </p>
@@ -18,43 +26,52 @@ export default function DmcaPolicyPage() {
       </div>
 
       {/* Sections Container */}
-      <div className="space-y-10 text-black/80 text-base sm:text-lg leading-relaxed">
+      <div className="space-y-12 text-sm sm:text-base leading-7 text-black/80">
         
         {/* Copyright Notice */}
-        <section className="bg-[#F4F1EA] p-8 rounded-2xl">
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+        <section className="space-y-4">
+          <h2
+            className="text-xl sm:text-2xl font-bold text-black uppercase"
+            style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+          >
             Copyright Notice
           </h2>
-          <p className="mb-4">
+          <p>
             A copyright complaint should clearly identify the protected work and explain where the material appears on the website.
           </p>
-          <p className="mb-3 font-semibold text-black">Please provide:</p>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-black/80 text-sm sm:text-base font-medium">
-            <div className="flex items-center gap-2">✓ Your name</div>
-            <div className="flex items-center gap-2">✓ Your contact information</div>
-            <div className="flex items-center gap-2">✓ A description of the copyrighted work</div>
-            <div className="flex items-center gap-2">✓ The exact page or location of the material</div>
-            <div className="flex items-center gap-2">✓ An explanation of your copyright concern</div>
-            <div className="flex items-center gap-2">✓ Confirmation that info is accurate</div>
+          <p className="font-semibold text-black pt-1">Please provide:</p>
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-x-8 gap-y-3 text-xs sm:text-sm font-medium">
+            <div>✓ Your name</div>
+            <div>✓ Your contact information</div>
+            <div>✓ A description of the copyrighted work</div>
+            <div>✓ The exact page or location of the material</div>
+            <div>✓ An explanation of your copyright concern</div>
+            <div>✓ Confirmation that info is accurate</div>
           </div>
         </section>
 
         {/* Content Review */}
-        <section>
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+        <section className="space-y-4">
+          <h2
+            className="text-xl sm:text-2xl font-bold text-black uppercase"
+            style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+          >
             Content Review
           </h2>
-          <p className="mb-4">
+          <p>
             After receiving a valid complaint, we will review the reported material and take appropriate action when necessary.
           </p>
-          <p className="text-sm text-black/70">
+          <p className="text-xs sm:text-sm text-black/70">
             If the material is found to violate copyright rights, we may remove it or restrict access to it.
           </p>
         </section>
 
         {/* False Claims */}
-        <section className="bg-black/5 p-8 rounded-2xl border-l-4 border-black">
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+        <section className="space-y-4">
+          <h2
+            className="text-xl sm:text-2xl font-bold text-black uppercase"
+            style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+          >
             False Claims
           </h2>
           <p>
@@ -63,8 +80,11 @@ export default function DmcaPolicyPage() {
         </section>
 
         {/* Contact */}
-        <section className="border-t border-black/10 pt-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+        <section className="space-y-4">
+          <h2
+            className="text-xl sm:text-2xl font-bold text-black uppercase"
+            style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+          >
             Contact
           </h2>
           <p>
@@ -72,6 +92,22 @@ export default function DmcaPolicyPage() {
           </p>
         </section>
 
+      </div>
+
+      {/* Quick Links */}
+      <div className="flex flex-wrap gap-4 pt-10 mt-16 border-t border-black/10">
+        <Link 
+          href="/contact" 
+          className="border-2 border-black bg-black text-white hover:bg-black/90 font-extrabold text-xs tracking-wider px-6 py-3 rounded-xl transition uppercase shadow-sm"
+        >
+          Contact Us
+        </Link>
+        <Link 
+          href="/" 
+          className="border-2 border-black bg-black text-white hover:bg-black/90 font-extrabold text-xs tracking-wider px-6 py-3 rounded-xl transition uppercase shadow-sm"
+        >
+          Home Page
+        </Link>
       </div>
 
     </div>

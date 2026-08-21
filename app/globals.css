@@ -4,9 +4,19 @@ body {
   background-color: #E2E6DF; 
   color: #1F2937;
   font-family: var(--font-roboto), sans-serif;
+  font-size: 0.9rem; 
+  line-height: 1.6;
   min-height: 100vh;
 }
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-bodoni), serif;
+}
+
+h1 {
+  font-weight: 900; 
+}
+
+h2 {
+  font-weight: 700;
 }

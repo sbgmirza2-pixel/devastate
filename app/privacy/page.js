@@ -1,14 +1,22 @@
+import Link from 'next/link';
+
 export default function PrivacyPolicyPage() {
   return (
-    <div className="max-w-4xl mx-auto px-6 py-16" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
+    <div
+      className="max-w-4xl mx-auto px-6 sm:px-10 py-16"
+      style={{ fontFamily: 'var(--font-roboto), sans-serif' }}
+    >
       
       {/* Main Heading */}
-      <h1 className="text-4xl sm:text-6xl font-normal text-black mb-6 tracking-wide uppercase" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+      <h1
+        className="text-4xl sm:text-5xl font-bold text-black uppercase mb-8"
+        style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+      >
         Privacy Policy
       </h1>
 
-      {/* Intro Paragraphs */}
-      <div className="space-y-6 text-black/80 text-base sm:text-lg leading-relaxed mb-12">
+      {/* Intro Text */}
+      <div className="text-sm sm:text-base leading-7 text-black/80 space-y-6 mb-12">
         <p>
           Your privacy matters to us. This Privacy Policy explains what information may be collected when you visit the website and how that information may be used.
         </p>
@@ -18,11 +26,14 @@ export default function PrivacyPolicyPage() {
       </div>
 
       {/* Sections Container */}
-      <div className="space-y-10 text-black/80 text-base sm:text-lg leading-relaxed">
+      <div className="space-y-12 text-sm sm:text-base leading-7 text-black/80">
         
         {/* Information We Collect */}
-        <section className="bg-[#F4F1EA] p-8 rounded-2xl">
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+        <section className="space-y-4">
+          <h2
+            className="text-xl sm:text-2xl font-bold text-black uppercase"
+            style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+          >
             Information We Collect
           </h2>
           <ul className="space-y-3 text-sm sm:text-base font-medium">
@@ -38,21 +49,27 @@ export default function PrivacyPolicyPage() {
         </section>
 
         {/* Cookies */}
-        <section>
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+        <section className="space-y-4">
+          <h2
+            className="text-xl sm:text-2xl font-bold text-black uppercase"
+            style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+          >
             Cookies
           </h2>
-          <p className="mb-4">
+          <p>
             The website may use cookies to support basic functions, understand visitor activity, improve the site, and support advertising services.
           </p>
-          <p className="text-sm text-black/70 italic bg-black/5 p-4 rounded-xl">
+          <p className="text-xs sm:text-sm text-black/70 italic">
             You can control or block cookies through your browser settings.
           </p>
         </section>
 
         {/* Analytics */}
-        <section>
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+        <section className="space-y-4">
+          <h2
+            className="text-xl sm:text-2xl font-bold text-black uppercase"
+            style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+          >
             Analytics
           </h2>
           <p>
@@ -61,8 +78,11 @@ export default function PrivacyPolicyPage() {
         </section>
 
         {/* Third-Party Services */}
-        <section>
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+        <section className="space-y-4">
+          <h2
+            className="text-xl sm:text-2xl font-bold text-black uppercase"
+            style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+          >
             Third-Party Services
           </h2>
           <p>
@@ -71,8 +91,11 @@ export default function PrivacyPolicyPage() {
         </section>
 
         {/* Children’s Privacy */}
-        <section>
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+        <section className="space-y-4">
+          <h2
+            className="text-xl sm:text-2xl font-bold text-black uppercase"
+            style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+          >
             Children’s Privacy
           </h2>
           <p>
@@ -81,8 +104,11 @@ export default function PrivacyPolicyPage() {
         </section>
 
         {/* Policy Changes */}
-        <section className="border-t border-black/10 pt-8">
-          <h2 className="text-2xl sm:text-3xl font-bold text-black mb-4 uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
+        <section className="space-y-4">
+          <h2
+            className="text-xl sm:text-2xl font-bold text-black uppercase"
+            style={{ fontFamily: 'var(--font-chakra-petch), sans-serif' }}
+          >
             Policy Changes
           </h2>
           <p>
@@ -90,6 +116,22 @@ export default function PrivacyPolicyPage() {
           </p>
         </section>
 
+      </div>
+
+      {/* Quick Links */}
+      <div className="flex flex-wrap gap-4 pt-10 mt-16 border-t border-black/10">
+        <Link 
+          href="/contact" 
+          className="border-2 border-black bg-black text-white hover:bg-black/90 font-extrabold text-xs tracking-wider px-6 py-3 rounded-xl transition uppercase shadow-sm"
+        >
+          Contact Us
+        </Link>
+        <Link 
+          href="/" 
+          className="border-2 border-black bg-black text-white hover:bg-black/90 font-extrabold text-xs tracking-wider px-6 py-3 rounded-xl transition uppercase shadow-sm"
+        >
+          Home Page
+        </Link>
       </div>
 
     </div>

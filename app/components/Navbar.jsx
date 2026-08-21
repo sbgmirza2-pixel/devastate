@@ -19,16 +19,15 @@ export default function Navbar() {
           <Link href="/" className="hover:opacity-70 transition">Home</Link>
           <Link href="/blog" className="hover:opacity-70 transition">Blog</Link>
           <Link href="/faqs" className="hover:opacity-70 transition">FAQs</Link>
-          <Link href="/download" className="hover:opacity-70 transition">Download</Link>
         </nav>
 
-        {/* Attractive Rounded Get App Button */}
+        {/* Get App Button */}
         <div className="flex items-center gap-3">
           <Link 
             href="/download" 
             className="border-2 border-black bg-black hover:bg-black/90 text-white font-extrabold text-xs tracking-wider px-6 py-3 rounded-xl transition shadow-md uppercase"
           >
-            Get App
+            Download Devastate APK
           </Link>
         </div>
 
