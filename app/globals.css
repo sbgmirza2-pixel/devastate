@@ -16,8 +16,9 @@ body {
 
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading), var(--font-roboto), sans-serif;
-  letter-spacing: -0.02em;
+  letter-spacing: 0.03em;
   color: #0f172a;
+  wordspacing: 0.05em;
 }
 
 h1 {

@@ -30,9 +30,9 @@ export default function Footer() {
 
         {/* Column 2: Legal Links */}
         <div>
-          <h4 className="text-white font-extrabold text-xs uppercase tracking-widest mb-4">
+          <p className="text-white font-extrabold text-xs uppercase tracking-widest mb-4">
             Legal & Pages
-          </h4>
+          </p>
           <ul className="space-y-2.5 text-sm">
             <li>
               <Link href="/about" className="hover:text-white transition">About Us</Link>
@@ -57,9 +57,9 @@ export default function Footer() {
 
         {/* Column 3: Follow Us On */}
         <div>
-          <h4 className="text-white font-extrabold text-xs uppercase tracking-widest mb-4">
+          <p className="text-white font-extrabold text-xs uppercase tracking-widest mb-4">
             Follow Us On
-          </h4>
+          </p>
           <div className="flex flex-wrap gap-2">
             {['Facebook', 'X', 'Instagram', 'Reddit', 'Pinterest', 'YouTube', 'Telegram', 'Tiktok'].map((social) => (
               <span 
