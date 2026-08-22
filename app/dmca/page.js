@@ -96,7 +96,7 @@ export default function DmcaPolicyPage() {
             Contact
           </h2>
           <p>
-            For copyright-related requests, use the contact details available on the Contact Us page. Please provide complete information so we can review your request properly.
+            For Copyright-related requests, use the contact details available on the Contact Us page. Please provide complete information so we can review your request properly.
           </p>
         </section>
 
