@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import { readData, writeData } from '@/lib/dataUtils';
-import { verifySession } from '@/lib/auth';
+import { verifySessionToken as verifySession } from '@/lib/auth';
 
 // DELETE /api/reviews/[id]  — admin only: delete a review
 export async function DELETE(request, { params }) {
