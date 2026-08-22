@@ -1,4 +1,4 @@
-import { readData } from '@/lib/dataUtils';
+import { readData, getReviewStats } from '@/lib/dataUtils';
 import JsonLd, { generateApkSchema, generateBreadcrumbSchema } from '@/app/components/JsonLd';
 
 export async function generateMetadata() {
@@ -42,7 +42,7 @@ export default function DownloadLayout({ children }) {
   } catch {}
 
   const siteUrl = siteSettings.siteUrl || 'https://thedevastate.com';
-  const apkSchema = generateApkSchema(apk, siteUrl);
+  const apkSchema = generateApkSchema(apk, siteUrl, getReviewStats());
   const breadcrumbSchema = generateBreadcrumbSchema(
     [
       { name: 'Home', url: '/' },

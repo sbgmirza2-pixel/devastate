@@ -1,12 +1,13 @@
 import Link from 'next/link';
-import { readData } from '@/lib/dataUtils';
+import { readData, getReviewStats } from '@/lib/dataUtils';
 import HeroShareButton from './HeroShareButton';
 
 export default function HeroSection() {
-  let apk = { rating: '4.8', reviews: '18,995+' };
+  let apk = {};
   try {
-    apk = readData('apkData.json');
+    apk = readData('apkData.json') || {};
   } catch {}
+  const { total, avgRating } = getReviewStats();
 
   return (
     <div className="w-full mb-12 flex flex-col items-center text-center">
@@ -38,10 +39,18 @@ export default function HeroSection() {
         </div>
 
         <div className="flex items-center gap-4 text-sm justify-center">
-          <div className="flex items-center gap-1 font-black text-black">
-            <span>⭐ {apk.rating} / 5</span>
-            <span className="text-black/80 font-bold">({apk.reviews} Reviews)</span>
-          </div>
+          <a href="#reviews" className="flex items-center gap-1 font-black text-black hover:opacity-80 transition">
+            {total === 0 ? (
+              <span className="text-black/70 font-bold">No ratings yet</span>
+            ) : (
+              <>
+                <span>⭐ {avgRating.toFixed(1)} / 5</span>
+                <span className="text-black/80 font-bold">
+                  ({total} Review{total !== 1 ? 's' : ''})
+                </span>
+              </>
+            )}
+          </a>
           <span className="text-black/40">|</span>
           <HeroShareButton appName={apk.appName || 'Devastate'} />
         </div>

@@ -3,7 +3,6 @@ import { blogsList } from '@/data/blogData';
 import { readData } from '@/lib/dataUtils';
 import Link from 'next/link';
 import MarkdownContent from '@/app/components/MarkdownContent';
-import BlogPostShare from './BlogPostShare';
 import JsonLd, { generateArticleSchema, generateBreadcrumbSchema } from '@/app/components/JsonLd';
 
 export async function generateMetadata({ params }) {
@@ -27,7 +26,7 @@ export async function generateMetadata({ params }) {
       description: post.excerpt,
       url: `/blog/${post.slug}`,
       publishedTime: post.date ? new Date(post.date).toISOString() : undefined,
-      authors: ['Devastate Editorial Team'],
+      authors: ['Devastate APK'],
       images: [
         {
           url: coverImg,
@@ -118,21 +117,6 @@ export default async function BlogPostPage({ params }) {
             {post.excerpt}
           </p>
         )}
-
-        {/* Share & Author bar */}
-        <div className="flex flex-wrap items-center justify-between gap-4 py-4 border-y border-black/10 text-xs sm:text-sm font-medium">
-          <div className="flex items-center gap-3">
-            <div className="w-9 h-9 rounded-full bg-black text-white flex items-center justify-center font-bold text-xs uppercase">
-              D
-            </div>
-            <div>
-              <p className="font-bold text-black uppercase text-xs tracking-wider">Devastate Editorial Team</p>
-              <p className="text-black/50 text-[11px]">Verified APK Guides & Insights</p>
-            </div>
-          </div>
-
-          <BlogPostShare title={post.title} />
-        </div>
       </header>
 
       {/* Cover Image */}

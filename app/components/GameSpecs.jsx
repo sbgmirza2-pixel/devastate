@@ -40,6 +40,7 @@ export default function AppInfoWithTableOfContents() {
     { title: "Is It Safe?", href: "#is-safe" },
     { title: "Pros and Cons", href: "#pros-and-cons" },
     { title: "Frequently Asked Questions", href: "#faq" },
+    { title: "User Ratings & Reviews", href: "#reviews" },
   ];
 
   return (

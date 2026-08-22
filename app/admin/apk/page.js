@@ -209,12 +209,6 @@ export default function AdminApkPage() {
           <FormField label="Developer">
             <input name="developer" value={form.developer || ''} onChange={handleChange} className={inputClass} />
           </FormField>
-          <FormField label="Rating">
-            <input name="rating" value={form.rating || ''} onChange={handleChange} className={inputClass} placeholder="4.8" />
-          </FormField>
-          <FormField label="Reviews Count">
-            <input name="reviews" value={form.reviews || ''} onChange={handleChange} className={inputClass} placeholder="18,995+" />
-          </FormField>
           <FormField label="Release Date">
             <input type="date" name="releaseDate" value={form.releaseDate || ''} onChange={handleChange} className={inputClass} />
           </FormField>

@@ -16,12 +16,12 @@ export default function JsonLd({ data }) {
 /**
  * Generates MobileApplication / SoftwareApplication schema for APK pages
  */
-export function generateApkSchema(apk = {}, siteUrl = 'https://thedevastate.com') {
+export function generateApkSchema(apk = {}, siteUrl = 'https://thedevastate.com', reviewStats = {}) {
   const downloadUrl = apk.downloadUrl?.startsWith('http')
     ? apk.downloadUrl
     : `${siteUrl}${apk.downloadUrl || '/download'}`;
 
-  return {
+  const schema = {
     '@context': 'https://schema.org',
     '@type': 'MobileApplication',
     name: `${apk.appName || 'Devastate'} APK`,
@@ -36,13 +36,6 @@ export function generateApkSchema(apk = {}, siteUrl = 'https://thedevastate.com'
       price: '0',
       priceCurrency: 'USD',
       availability: 'https://schema.org/InStock',
-    },
-    aggregateRating: {
-      '@type': 'AggregateRating',
-      ratingValue: apk.rating || '4.8',
-      ratingCount: '18995',
-      bestRating: '5',
-      worstRating: '1',
     },
     author: {
       '@type': 'Organization',
@@ -61,6 +54,18 @@ export function generateApkSchema(apk = {}, siteUrl = 'https://thedevastate.com'
     description:
       'Download Devastate APK for Android. Anime-style simulation game with 2D visuals, interactive story dialogue, tasks, items, and character customization.',
   };
+
+  if (reviewStats.total > 0) {
+    schema.aggregateRating = {
+      '@type': 'AggregateRating',
+      ratingValue: Number(reviewStats.avgRating).toFixed(1),
+      ratingCount: String(reviewStats.total),
+      bestRating: '5',
+      worstRating: '1',
+    };
+  }
+
+  return schema;
 }
 
 /**
@@ -136,7 +141,7 @@ export function generateArticleSchema(post, siteUrl = 'https://thedevastate.com'
     dateModified: publishedDate,
     author: {
       '@type': 'Organization',
-      name: 'Devastate Editorial Team',
+      name: 'Devastate APK',
       url: siteUrl,
     },
     publisher: {
