@@ -77,13 +77,13 @@ export default function BlogListClient({ posts = [] }) {
           </button>
         </div>
       ) : (
-        /* All Posts Grid Layout (Same sequence for all blogs) */
+        /* All Posts Grid Layout */
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
           {filteredPosts.map((post) => (
-            <article
-              key={post.id || post.slug}
-              className="bg-white rounded-2xl overflow-hidden border border-black/10 shadow-sm hover:shadow-lg hover:-translate-y-1 transition-all duration-300 flex flex-col justify-between group"
-            >
+          <article
+  key={post.id || post.slug}
+  className="bg-white rounded-2xl overflow-hidden border border-black/10 shadow-sm hover:shadow-[0_0_30px_rgba(0,0,0,0.25)] hover:border-black/60 hover:-translate-y-1.5 transition-all duration-300 flex flex-col justify-between group"
+>
               <div>
                 {/* Card Thumbnail */}
                 <div className="relative aspect-[16/10] overflow-hidden bg-black/5 border-b border-black/5">
