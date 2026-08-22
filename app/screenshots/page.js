@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "Gameplay Screenshots - Devastate APK",
+  description: "View in-game screenshots and visual gallery for Devastate APK anime simulation game on Android.",
+  alternates: {
+    canonical: '/screenshots',
+  },
+};
+
 export default function ScreenshotsPage() {
   return (
     <div className="w-full text-left py-12 px-6 sm:px-12 lg:px-20">

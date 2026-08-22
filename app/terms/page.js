@@ -1,5 +1,13 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: "Terms & Conditions - Devastate APK",
+  description: "Terms and conditions of use for Devastate APK website, guides, and download resources.",
+  alternates: {
+    canonical: '/terms',
+  },
+};
+
 export default function TermsConditionsPage() {
   return (
     <div

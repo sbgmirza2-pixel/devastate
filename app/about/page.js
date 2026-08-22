@@ -1,5 +1,13 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: "About Us - Devastate APK",
+  description: "Learn about Devastate APK, our mission to provide verified Android game guides, APK details, tutorials, and security information.",
+  alternates: {
+    canonical: '/about',
+  },
+};
+
 export default function AboutPage() {
   return (
     <div

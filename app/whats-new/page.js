@@ -1,3 +1,11 @@
+export const metadata = {
+  title: "What's New in Devastate APK - Changelog & Update History",
+  description: "Check the latest version updates, changelogs, bug fixes, and feature releases for Devastate APK on Android.",
+  alternates: {
+    canonical: '/whats-new',
+  },
+};
+
 export default function WhatsNewPage() {
   return (
     <div className="w-full text-left">

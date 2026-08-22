@@ -1,5 +1,13 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: "Download & Installation Guide - Devastate APK",
+  description: "Simple step-by-step instructions to download and install Devastate APK on Android phones and tablets.",
+  alternates: {
+    canonical: '/guide',
+  },
+};
+
 export default function GuidePage() {
   return (
     <div className="w-full max-w-4xl mx-auto px-0 py-8 text-left">

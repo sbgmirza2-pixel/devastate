@@ -1,8 +1,12 @@
 {
   "siteName": "Devastate APK",
   "siteDescription": "Download Devastate APK for Android and enjoy an anime-style simulation game with 2D visuals, character stories, dialogue choices, daily tasks, items, coins, outfits, and more.",
-  "siteUrl": "https://devastateapk.com",
-  "contactEmail": "contact@devastateapk.com",
+  "siteUrl": "https://thedevastate.com",
+  "contactEmail": "contact@thedevastate.com",
+  "gaMeasurementId": "",
+  "gscVerificationToken": "",
+  "language": "en",
+  "allowIndexing": true,
   "socialLinks": {
     "facebook": "",
     "twitter": "",

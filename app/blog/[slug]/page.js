@@ -1,8 +1,10 @@
 import { notFound } from 'next/navigation';
 import { blogsList } from '@/data/blogData';
+import { readData } from '@/lib/dataUtils';
 import Link from 'next/link';
 import MarkdownContent from '@/app/components/MarkdownContent';
 import BlogPostShare from './BlogPostShare';
+import JsonLd, { generateArticleSchema, generateBreadcrumbSchema } from '@/app/components/JsonLd';
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
@@ -10,13 +12,36 @@ export async function generateMetadata({ params }) {
   if (!post) {
     return { title: 'Post Not Found - Devastate' };
   }
+
+  const coverImg = post.coverImage || '/picblog.webp';
+
   return {
-    title: `${post.title} - Devastate APK Blog`,
+    title: `${post.title} - Devastate APK`,
     description: post.excerpt || `Read ${post.title} on Devastate APK official blog.`,
+    alternates: {
+      canonical: `/blog/${post.slug}`,
+    },
     openGraph: {
+      type: 'article',
       title: post.title,
       description: post.excerpt,
-      images: [post.coverImage || '/picblog.webp'],
+      url: `/blog/${post.slug}`,
+      publishedTime: post.date ? new Date(post.date).toISOString() : undefined,
+      authors: ['Devastate Editorial Team'],
+      images: [
+        {
+          url: coverImg,
+          width: 1200,
+          height: 630,
+          alt: post.title,
+        },
+      ],
+    },
+    twitter: {
+      card: 'summary_large_image',
+      title: post.title,
+      description: post.excerpt,
+      images: [coverImg],
     },
   };
 }
@@ -29,6 +54,24 @@ export default async function BlogPostPage({ params }) {
     notFound();
   }
 
+  let siteSettings = {};
+  try {
+    siteSettings = readData('siteSettings.json') || {};
+  } catch {}
+
+  const siteUrl = siteSettings.siteUrl || 'https://thedevastate.com';
+
+  // Structured Data
+  const articleSchema = generateArticleSchema(post, siteUrl);
+  const breadcrumbSchema = generateBreadcrumbSchema(
+    [
+      { name: 'Home', url: '/' },
+      { name: 'Blog', url: '/blog' },
+      { name: post.title, url: `/blog/${post.slug}` },
+    ],
+    siteUrl
+  );
+
   // Related posts (excluding current post, max 3)
   const relatedPosts = blogsList
     .filter((p) => p.slug !== slug && (p.category === post.category || true))
@@ -38,6 +81,8 @@ export default async function BlogPostPage({ params }) {
 
   return (
     <article className="w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-10" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
+      <JsonLd data={articleSchema} />
+      <JsonLd data={breadcrumbSchema} />
       
       {/* Breadcrumb Navigation */}
       <nav aria-label="Breadcrumb" className="mb-6 flex items-center gap-2 text-xs sm:text-sm font-semibold text-black/60 uppercase tracking-wider">

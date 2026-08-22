@@ -1,5 +1,13 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: "Contact Us - Devastate APK",
+  description: "Get in touch with the Devastate APK team for inquiries, feedback, corrections, or support.",
+  alternates: {
+    canonical: '/contact',
+  },
+};
+
 export default function ContactUsPage() {
   return (
     <div

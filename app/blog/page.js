@@ -1,14 +1,30 @@
 import { blogsList } from '@/data/blogData';
 import BlogListClient from './BlogListClient';
+import JsonLd, { generateBreadcrumbSchema } from '@/app/components/JsonLd';
 
 export const metadata = {
   title: "Devastate APK Blog - Guides, Tutorials, Updates & Safety Insights",
   description: "Explore in-depth Devastate APK guides, PC installation steps, troubleshooting fixes, updates changelog, permission checks, and gameplay walkthroughs.",
+  alternates: {
+    canonical: '/blog',
+  },
+  openGraph: {
+    title: "Devastate APK Blog - Guides, Tutorials, Updates & Safety Insights",
+    description: "Explore in-depth Devastate APK guides, PC installation steps, troubleshooting fixes, updates changelog, permission checks, and gameplay walkthroughs.",
+    url: '/blog',
+    images: ['/picblog.webp'],
+  },
 };
 
 export default function BlogPage() {
+  const breadcrumbSchema = generateBreadcrumbSchema([
+    { name: 'Home', url: '/' },
+    { name: 'Blog', url: '/blog' },
+  ]);
+
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
+      <JsonLd data={breadcrumbSchema} />
       
       {/* Top Banner Header */}
       <div className="flex flex-col items-center text-center max-w-3xl mx-auto mb-12">

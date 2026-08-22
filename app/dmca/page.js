@@ -1,5 +1,13 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: "DMCA Copyright Policy - Devastate APK",
+  description: "Digital Millennium Copyright Act (DMCA) notice and takedown procedure for Devastate APK.",
+  alternates: {
+    canonical: '/dmca',
+  },
+};
+
 export default function DmcaPolicyPage() {
   return (
     <div

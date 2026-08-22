@@ -1,6 +1,19 @@
 import Link from 'next/link';
 
-export default function HomePage() {
+export const metadata = {
+  title: "How to Install Devastate APK on Android - Step-by-Step Guide",
+  description: "Complete guide on how to safely install Devastate APK on Android phones and tablets, enable Unknown Sources, and fix common install errors.",
+  alternates: {
+    canonical: '/install-guide',
+  },
+  openGraph: {
+    title: "How to Install Devastate APK on Android - Step-by-Step Guide",
+    description: "Complete guide on how to safely install Devastate APK on Android.",
+    url: '/install-guide',
+  },
+};
+
+export default function InstallGuidePage() {
   return (
     <div className="max-w-5xl mx-auto px-6 py-12" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
       

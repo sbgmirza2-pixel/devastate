@@ -1,5 +1,13 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: "Disclaimer - Devastate APK",
+  description: "Official disclaimer for Devastate APK information, downloads, guides, and third-party trademarks.",
+  alternates: {
+    canonical: '/disclaimer',
+  },
+};
+
 export default function DisclaimerPage() {
   return (
     <div

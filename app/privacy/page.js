@@ -1,5 +1,13 @@
 import Link from 'next/link';
 
+export const metadata = {
+  title: "Privacy Policy - Devastate APK",
+  description: "Read the Privacy Policy for Devastate APK to understand how visitor data, cookies, and privacy are protected.",
+  alternates: {
+    canonical: '/privacy',
+  },
+};
+
 export default function PrivacyPolicyPage() {
   return (
     <div
