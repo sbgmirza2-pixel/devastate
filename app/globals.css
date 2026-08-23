@@ -46,3 +46,48 @@ h3 {
 h4 {
   font-weight: 600;
 }
+
+/* Keep the private admin UI light without changing the public site palette. */
+.admin-light {
+  background-color: #ffffff !important;
+  color: #111827;
+}
+
+.admin-light [class*="bg-[#0f0f0f]"],
+.admin-light [class*="bg-[#151515]"],
+.admin-light [class*="bg-[#1a1a1a]"],
+.admin-light [class*="bg-black/"] {
+  background-color: #ffffff !important;
+}
+
+.admin-light [class*="bg-white/"] {
+  background-color: #f8fafc !important;
+}
+
+.admin-light [class*="text-white"] {
+  color: #111827 !important;
+}
+
+.admin-light [class*="border-white"] {
+  border-color: #e2e8f0 !important;
+}
+
+.admin-light [class*="placeholder-white"]::placeholder {
+  color: #94a3b8 !important;
+}
+
+.admin-light [class*="hover:bg-white"]:hover {
+  background-color: #f1f5f9 !important;
+}
+
+.admin-light [class*="hover:border-white"]:hover {
+  border-color: #cbd5e1 !important;
+}
+
+.admin-light [class*="focus:bg-white"]:focus {
+  background-color: #ffffff !important;
+}
+
+.admin-light [class*="focus:border-white"]:focus {
+  border-color: #94a3b8 !important;
+}

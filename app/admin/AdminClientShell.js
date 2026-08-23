@@ -39,14 +39,14 @@ export default function AdminClientShell({ children }) {
   if (pathname === '/admin/login') return <>{children}</>;
   if (checking) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-[#0f0f0f]">
+      <div className="admin-light min-h-screen flex items-center justify-center bg-[#0f0f0f]">
         <div className="text-white/50 text-sm animate-pulse font-mono">Verifying session…</div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen flex bg-[#0f0f0f] font-sans">
+    <div className="admin-light min-h-screen flex bg-[#0f0f0f] font-sans">
       {/* Sidebar */}
       <aside className={`
         fixed inset-y-0 left-0 z-40 w-64 bg-[#151515] border-r border-white/5
