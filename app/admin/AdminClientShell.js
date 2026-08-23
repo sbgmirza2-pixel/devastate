@@ -91,7 +91,7 @@ export default function AdminClientShell({ children }) {
           })}
         </nav>
 
-        {/* Bottom: View Site + Logout */}
+        {/* Bottom: View Site+Logout */}
         <div className="px-3 py-4 border-t border-white/5 space-y-1">
           <Link
             href="/"
