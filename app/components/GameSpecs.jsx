@@ -39,8 +39,7 @@ export default function AppInfoWithTableOfContents() {
     { title: "How to Install", href: "#how-to-install" },
     { title: "Is It Safe?", href: "#is-safe" },
     { title: "Pros and Cons", href: "#pros-and-cons" },
-    { title: "Frequently Asked Questions", href: "#faq" },
-    { title: "User Ratings & Reviews", href: "#reviews" },
+    { title: "Frequently Asked Questions", href: "#faq" }
   ];
 
   return (

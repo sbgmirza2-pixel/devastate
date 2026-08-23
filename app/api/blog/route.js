@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { readData, writeData } from '@/lib/dataUtils';
 import { isAuthenticated } from '@/lib/auth';
+import { normalizeBlogContent } from '@/lib/normalizeBlogContent';
 
 // GET /api/blog — public, returns all blog posts
 export async function GET() {
@@ -38,6 +39,7 @@ export async function POST(request) {
       id: Date.now().toString(),
       date: new Date().toISOString().split('T')[0],
       ...newPost,
+      content: normalizeBlogContent(newPost.content),
     };
 
     posts.unshift(post); // newest first

@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { getReviewStats } from '@/lib/dataUtils';
 
 export const metadata = {
   title: "How to Install Devastate APK on Android - Step-by-Step Guide",
@@ -15,11 +14,6 @@ export const metadata = {
 };
 
 export default function InstallGuidePage() {
-  const { total, avgRating } = getReviewStats();
-  const ratingLabel =
-    total === 0
-      ? 'No ratings yet'
-      : `${avgRating.toFixed(1)} / 5 (${total} Review${total !== 1 ? 's' : ''})`;
 
   return (
     <div className="max-w-5xl mx-auto px-6 py-12" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
@@ -87,7 +81,7 @@ export default function InstallGuidePage() {
           </div>
           <div className="flex justify-between border-b border-black/10 py-2">
             <span className="font-bold text-black/60">Rating</span>
-            <span className="font-semibold text-black">{ratingLabel}</span>
+            <span className="font-semibold text-black">4.5/5</span>
           </div>
           <div className="flex justify-between border-b border-black/10 py-2">
             <span className="font-bold text-black/60">Age Rating</span>

@@ -3,6 +3,13 @@
 :root {
   --font-anton: var(--font-heading), var(--font-roboto), sans-serif;
   --font-bodoni: var(--font-heading), var(--font-roboto), sans-serif;
+  --page-gutter: 1rem;
+}
+
+html,
+body {
+  overflow-x: clip;
+  max-width: 100%;
 }
 
 body {

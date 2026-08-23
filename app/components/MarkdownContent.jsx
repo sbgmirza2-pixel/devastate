@@ -8,6 +8,22 @@ import Link from 'next/link';
 export default function MarkdownContent({ content }) {
   if (!content) return null;
 
+  const normalizeHref = (href) => {
+    if (!href || href.startsWith('/') || href.startsWith('#')) return href;
+
+    try {
+      const url = new URL(href);
+      const currentHost = typeof window !== 'undefined' ? window.location.host : null;
+      const isSameSite =
+        url.host === currentHost ||
+        ['devastate.vercel.app', 'thedevastate.com', 'www.thedevastate.com'].includes(url.host);
+
+      return isSameSite ? `${url.pathname}${url.search}${url.hash}` : href;
+    } catch {
+      return href;
+    }
+  };
+
   return (
     <div className="prose-devastate max-w-none text-[#1f2937] leading-relaxed text-base sm:text-[17px]">
       <ReactMarkdown
@@ -84,11 +100,12 @@ export default function MarkdownContent({ content }) {
             </figure>
           ),
           a: ({ node, href, children, ...props }) => {
-            const isInternal = href && (href.startsWith('/') || href.startsWith('#'));
+            const normalizedHref = normalizeHref(href);
+            const isInternal = normalizedHref && (normalizedHref.startsWith('/') || normalizedHref.startsWith('#'));
             if (isInternal) {
               return (
                 <Link
-                  href={href}
+                  href={normalizedHref}
                   className="text-black font-semibold underline decoration-black/40 hover:decoration-black transition-all"
                   {...props}
                 >

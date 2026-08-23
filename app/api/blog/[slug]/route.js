@@ -1,6 +1,7 @@
 import { NextResponse } from 'next/server';
 import { readData, writeData } from '@/lib/dataUtils';
 import { isAuthenticated } from '@/lib/auth';
+import { normalizeBlogContent } from '@/lib/normalizeBlogContent';
 
 // GET /api/blog/[slug] — public
 export async function GET(request, { params }) {
@@ -27,7 +28,11 @@ export async function PUT(request, { params }) {
     const index = posts.findIndex((p) => p.slug === slug);
     if (index === -1) return NextResponse.json({ error: 'Not found' }, { status: 404 });
 
-    posts[index] = { ...posts[index], ...updates };
+    posts[index] = {
+      ...posts[index],
+      ...updates,
+      ...(updates.content ? { content: normalizeBlogContent(updates.content) } : {}),
+    };
     writeData('blogPosts.json', posts);
     return NextResponse.json(posts[index]);
   } catch {

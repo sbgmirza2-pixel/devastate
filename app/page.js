@@ -12,11 +12,10 @@ import HowtoInstall from './components/HowtoInstall';
 import CommonProblems from './components/CommonProblems';
 import PropsandCorn from './components/PropsandCorn';
 import FaqSection from './components/FaqSection';
-import ReviewSection from './components/ReviewSection';
 import FinalWords from './components/FinalWords';
 import ScreenshotsPage from './screenshots/page';
 import JsonLd, { generateApkSchema } from './components/JsonLd';
-import { readData, getReviewStats } from '@/lib/dataUtils';
+import { readData } from '@/lib/dataUtils';
 
 export const metadata = {
   title: "Devastate APK Download for Android - Anime Simulation Game",
@@ -40,11 +39,9 @@ export default function HomePage() {
     siteSettings = readData('siteSettings.json') || {};
   } catch {}
 
-  const reviewStats = getReviewStats();
   const apkSchema = generateApkSchema(
     apk,
-    siteSettings.siteUrl || 'https://thedevastate.com',
-    reviewStats
+    siteSettings.siteUrl || 'https://thedevastate.com'
   );
 
   return (
@@ -65,7 +62,6 @@ export default function HomePage() {
       <CommonProblems />
       <PropsandCorn />
       <FaqSection />
-      <ReviewSection />
       <FinalWords />
     </div>
   );
