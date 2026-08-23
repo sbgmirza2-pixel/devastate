@@ -38,8 +38,15 @@ export default function HeroSection() {
         </div>
 
         <div className="flex items-center gap-4 text-sm justify-center">
-          <div  className="flex items-center gap-1 font-black text-black hover:opacity-80 transition">
-            <span className="text-black/70 font-bold">Rated 4.5/5 · 19k</span>
+          <div className="flex items-center gap-2 font-black text-black hover:opacity-80 transition" aria-label="Rated 4.5 out of 5 stars from 19,000 reviews">
+            <span className="flex items-center text-lg leading-none tracking-wide" aria-hidden="true">
+              <span className="text-amber-500">★★★★</span>
+              <span className="relative inline-block text-black/15">
+                ★
+                <span className="absolute inset-y-0 left-0 w-1/2 overflow-hidden text-amber-500">★</span>
+              </span>
+            </span>
+            <span className="text-black/70 font-bold">4.5/5 · 19k reviews</span>
           </div>
           <span className="text-black/40">|</span>
           <HeroShareButton appName={apk.appName || 'Devastate'} />
