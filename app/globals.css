@@ -106,3 +106,32 @@ h4 {
 .admin-light [class*="focus:border-white"]:focus {
   border-color: #94a3b8 !important;
 }
+
+.admin-light button {
+  cursor: pointer;
+}
+
+.admin-light button:not([class*="bg-"]):not([class*="p-1"]):not([class*="p-2"]):not([class*="py-1"]):not([class*="py-2"]) {
+  background: #111827;
+  border: 1px solid #111827;
+  border-radius: 0.75rem;
+  color: #ffffff !important;
+  padding: 0.625rem 1rem;
+  transition: background-color 160ms ease, border-color 160ms ease, transform 160ms ease, box-shadow 160ms ease;
+}
+
+.admin-light button:not([class*="bg-"]):not([class*="p-1"]):not([class*="p-2"]):not([class*="py-1"]):not([class*="py-2"]):hover {
+  background: #263244;
+  border-color: #263244;
+  box-shadow: 0 4px 12px rgb(15 23 42 / 18%);
+  transform: translateY(-1px);
+}
+
+.admin-light button:not([class*="bg-"]):not([class*="p-1"]):not([class*="p-2"]):not([class*="py-1"]):not([class*="py-2"]):active {
+  transform: translateY(0);
+}
+
+.admin-light button:disabled {
+  cursor: not-allowed;
+  transform: none;
+}
