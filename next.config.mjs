@@ -1,6 +1,5 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
-  output: 'standalone',
   devIndicators: false,
   poweredByHeader: false, // Security: Remove X-Powered-By header
   compress: true, // Enable gzip/brotli compression for speed & Core Web Vitals
