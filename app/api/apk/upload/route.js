@@ -1,8 +1,11 @@
 import { NextResponse } from 'next/server';
 import { hasPermission } from '@/lib/auth';
-import { put } from '@vercel/blob';
+import { getCurrentAdmin } from '@/lib/auth';
+import { handleUpload } from '@vercel/blob/client';
 import { getDatabase } from '@/lib/mongodb';
 import { recordActivity } from '@/lib/database';
+
+const MAX_APK_SIZE = 500 * 1024 * 1024;
 
 function formatBytes(bytes) {
   if (!bytes) return '0 Bytes';
@@ -18,44 +21,50 @@ export async function POST(request) {
   }
 
   try {
-    const formData = await request.formData();
-    const file = formData.get('apkFile');
-
-    if (!file || file.size === 0 || file.size > 500 * 1024 * 1024) {
-      return NextResponse.json({ error: 'No file provided' }, { status: 400 });
-    }
-
-    if (!file.name.endsWith('.apk')) {
-      return NextResponse.json({ error: 'Only .apk files are allowed' }, { status: 400 });
-    }
-
     if (!process.env.BLOB_READ_WRITE_TOKEN) return NextResponse.json({ error: 'File storage is not configured' }, { status: 503 });
-    const blob = await put(`apk/devastate-${Date.now()}.apk`, file, { access: 'public' });
 
-    // Auto-calculate size
-    const sizeBytes = file.size;
-    const sizeFormatted = formatBytes(sizeBytes);
-    const localPath = blob.url;
-    const apkId = formData.get('apkId');
+    const body = await request.json();
+    if (body.action === 'finalize') {
+      const { apkId, url, pathname, sizeBytes } = body;
+      if (!apkId || !url || !pathname || !Number.isInteger(sizeBytes) || sizeBytes <= 0 || sizeBytes > MAX_APK_SIZE) {
+        return NextResponse.json({ error: 'Invalid APK upload details' }, { status: 400 });
+      }
+      if (!pathname.toLowerCase().endsWith('.apk')) return NextResponse.json({ error: 'Only .apk files are allowed' }, { status: 400 });
 
-    if (!apkId) return NextResponse.json({ error: 'Select and save an APK version before uploading its file' }, { status: 400 });
+      const db = await getDatabase();
+      if (!db) return NextResponse.json({ error: 'Database is not configured' }, { status: 503 });
+      const { ObjectId } = await import('mongodb');
+      if (!ObjectId.isValid(apkId)) return NextResponse.json({ error: 'Invalid APK id' }, { status: 400 });
+      const id = new ObjectId(apkId);
+      const size = formatBytes(sizeBytes);
+      const result = await db.collection('apks').findOneAndUpdate(
+        { _id: id },
+        { $set: { sizeBytes, size, localApkPath: url, useLocalFile: true, downloadUrl: url, updatedAt: new Date() } },
+        { returnDocument: 'after' }
+      );
+      if (!result) return NextResponse.json({ error: 'APK version not found' }, { status: 404 });
+      const admin = await getCurrentAdmin();
+      await recordActivity({ adminId: admin?._id.toString(), action: 'uploaded', entity: 'apk', entityId: apkId, details: { name: result.appName, version: result.version } });
+      return NextResponse.json({ success: true, fileName: pathname, size, sizeBytes, path: url, apk: { ...result, _id: result._id.toString() } });
+    }
 
-    const db = await getDatabase();
-    if (!db) return NextResponse.json({ error: 'Database is not configured' }, { status: 503 });
-    const { ObjectId } = await import('mongodb');
-    if (!ObjectId.isValid(apkId)) return NextResponse.json({ error: 'Invalid APK id' }, { status: 400 });
-    const id = new ObjectId(apkId);
-    const result = await db.collection('apks').findOneAndUpdate(
-      { _id: id },
-      { $set: { sizeBytes, size: sizeFormatted, localApkPath: localPath, useLocalFile: true, downloadUrl: localPath, updatedAt: new Date() } },
-      { returnDocument: 'after' }
-    );
-    if (!result) return NextResponse.json({ error: 'APK version not found' }, { status: 404 });
-    const admin = await (await import('@/lib/auth')).getCurrentAdmin();
-    await recordActivity({ adminId: admin?._id.toString(), action: 'uploaded', entity: 'apk', entityId: apkId, details: { name: result.appName, version: result.version } });
-    return NextResponse.json({ success: true, fileName: blob.pathname, size: sizeFormatted, sizeBytes, path: localPath, apk: { ...result, _id: result._id.toString() } });
+    const uploadResponse = await handleUpload({
+      request,
+      body,
+      onBeforeGenerateToken: async (pathname, clientPayload, multipart) => {
+        if (!multipart || !pathname.toLowerCase().endsWith('.apk')) throw new Error('APK uploads must use multipart upload');
+        const { apkId } = JSON.parse(clientPayload || '{}');
+        if (!apkId) throw new Error('Select and save an APK version before uploading its file');
+        return {
+          allowedContentTypes: ['application/vnd.android.package-archive', 'application/octet-stream'],
+          maximumSizeInBytes: MAX_APK_SIZE,
+          addRandomSuffix: true,
+        };
+      },
+    });
+    return NextResponse.json(uploadResponse);
   } catch (err) {
     console.error('Upload error:', err);
-    return NextResponse.json({ error: 'Upload failed' }, { status: 500 });
+    return NextResponse.json({ error: err.message || 'Upload failed' }, { status: 400 });
   }
 }

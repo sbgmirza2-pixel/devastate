@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import { upload } from '@vercel/blob/client';
 
 const emptyForm = {
   appName: '', version: '', packageName: '', developer: '', category: '', size: '', sizeBytes: '',
@@ -42,9 +43,26 @@ export default function AdminApkPage() {
     const file = event.target.files?.[0];
     if (!file) return;
     if (!editing) { setMessage('Save the APK version first, then upload its file.'); event.target.value = ''; return; }
+    if (!file.name.toLowerCase().endsWith('.apk') || file.size > 500 * 1024 * 1024) {
+      setMessage('Choose an APK file up to 500 MB.'); event.target.value = ''; return;
+    }
     setUploading('apk');
-    const data = new FormData(); data.append('apkFile', file); data.append('apkId', editing);
-    const response = await fetch('/api/apk/upload', { method: 'POST', body: data });
+    let response;
+    try {
+      const blob = await upload(`apk/devastate-${Date.now()}.apk`, file, {
+        access: 'public',
+        multipart: true,
+        handleUploadUrl: '/api/apk/upload',
+        clientPayload: JSON.stringify({ apkId: editing }),
+      });
+      response = await fetch('/api/apk/upload', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'finalize', apkId: editing, url: blob.url, pathname: blob.pathname, sizeBytes: file.size }),
+      });
+    } catch (error) {
+      setMessage(error.message || 'APK upload failed.'); setUploading(''); event.target.value = ''; return;
+    }
     const result = await response.json();
     setMessage(response.ok ? 'APK file uploaded.' : result.error || 'APK upload failed.');
     if (response.ok) setForm((current) => ({ ...current, ...result.apk }));
