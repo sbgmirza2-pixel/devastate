@@ -7,7 +7,7 @@ export default function FinalWords() {
           Final Words
         </h2>
 
-        {/* Content Paragraphs */}
+        {/* Content paragraphs */}
         <div className="w-full space-y-4 text-base sm:text-lg text-black/90 leading-relaxed font-normal">
           <p>
             Devastate APK offers a different kind of Android gaming experience for players who enjoy anime-inspired visuals, character interaction, dialogue, mystery, items, daily activities, rewards, and customization.
