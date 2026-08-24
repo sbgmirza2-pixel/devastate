@@ -9,7 +9,7 @@ export default function DeviceCompatibility() {
   ];
 
   return (
-    // w-screen and background preserved with responsive side padding inner wrapper
+    // w-screen & background preserved with responsive side padding inner wrapper
     <div id ="requirements" className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12 py-12 bg-black/[0.06]">
       <div className="px-6 sm:px-12 lg:px-24 xl:px-48">
         <div className="w-full flex flex-col items-start">
