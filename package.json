@@ -7,8 +7,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "eslint",
-    "db:migrate": "node scripts/migrate-mongodb.mjs"
-    ,
+    "db:migrate": "node scripts/migrate-mongodb.mjs",
     "db:seed:git": "node scripts/seed-mongodb-from-git.mjs"
   },
   "dependencies": {
