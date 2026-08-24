@@ -1,5 +1,5 @@
-import { blogsList } from '@/data/blogData';
 import BlogListClient from './BlogListClient';
+import { listBlogPosts } from '@/lib/database';
 import JsonLd, { generateBreadcrumbSchema } from '@/app/components/JsonLd';
 
 export const metadata = {
@@ -16,7 +16,8 @@ export const metadata = {
   },
 };
 
-export default function BlogPage() {
+export default async function BlogPage() {
+  const posts = await listBlogPosts();
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
     { name: 'Blog', url: '/blog' },
@@ -43,7 +44,7 @@ export default function BlogPage() {
       </div>
 
       {/* Interactive Blog List Component */}
-      <BlogListClient posts={blogsList} />
+      <BlogListClient posts={posts.map((post) => ({ ...post, _id: post._id?.toString() }))} />
 
     </div>
   );

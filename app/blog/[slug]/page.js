@@ -1,6 +1,5 @@
 import { notFound } from 'next/navigation';
-import { blogsList } from '@/data/blogData';
-import { readData } from '@/lib/dataUtils';
+import { getBlogPost, listBlogPosts, getContent } from '@/lib/database';
 import Link from 'next/link';
 import MarkdownContent from '@/app/components/MarkdownContent';
 import JsonLd, {
@@ -10,7 +9,7 @@ import JsonLd, {
 
 export async function generateMetadata({ params }) {
   const { slug } = await params;
-  const post = blogsList.find((p) => p.slug === slug);
+  const post = await getBlogPost(slug);
 
   if (!post) {
     return { title: 'Post Not Found - Devastate' };
@@ -64,7 +63,7 @@ export default async function BlogPostPage({ params }) {
   let siteSettings = {};
 
   try {
-    siteSettings = readData('siteSettings.json') || {};
+    siteSettings = await getContent('settings', {});
   } catch {}
 
   const siteUrl =
@@ -86,7 +85,7 @@ export default async function BlogPostPage({ params }) {
   );
 
   // Related posts (excluding current post, max 3)
-  const relatedPosts = blogsList
+  const relatedPosts = (await listBlogPosts())
     .filter(
       (p) =>
         p.slug !== slug &&

@@ -6,6 +6,7 @@ import { useRouter } from 'next/navigation';
 export default function AdminLoginPage() {
   const router = useRouter();
   const [password, setPassword] = useState('');
+  const [email, setEmail] = useState('');
   const [error, setError] = useState('');
   const [loading, setLoading] = useState(false);
 
@@ -18,7 +19,7 @@ export default function AdminLoginPage() {
       const res = await fetch('/api/admin/login', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ password }),
+        body: JSON.stringify({ email, password }),
       });
 
       if (res.ok) {
@@ -48,6 +49,20 @@ export default function AdminLoginPage() {
 
         {/* Form */}
         <form onSubmit={handleSubmit} className="space-y-4">
+          <div>
+            <label className="block text-white/40 text-xs uppercase tracking-widest mb-2">
+              Email
+            </label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="admin@example.com"
+              required
+              className="w-full bg-white/5 border border-white/10 text-white rounded-xl px-4 py-3 text-sm
+                         focus:outline-none focus:border-white/30 focus:bg-white/8 transition placeholder-white/20"
+            />
+          </div>
           <div>
             <label className="block text-white/40 text-xs uppercase tracking-widest mb-2">
               Password
@@ -80,7 +95,7 @@ export default function AdminLoginPage() {
         </form>
 
         <p className="text-center text-white/20 text-xs mt-8">
-          Set <code className="font-mono">ADMIN_PASSWORD</code> in <code className="font-mono">.env.local</code>
+          Configure an administrator in MongoDB before signing in.
         </p>
       </div>
     </div>

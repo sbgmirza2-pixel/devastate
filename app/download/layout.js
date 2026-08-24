@@ -1,44 +1,44 @@
-import { readData } from '@/lib/dataUtils';
+import { getContent } from '@/lib/database';
 import JsonLd, { generateApkSchema, generateBreadcrumbSchema } from '@/app/components/JsonLd';
 
 export async function generateMetadata() {
   let apk = {};
   let siteSettings = {};
   try {
-    apk = readData('apkData.json') || {};
-    siteSettings = readData('siteSettings.json') || {};
+    apk = await getContent('apk', {}) || {};
+    siteSettings = await getContent('settings', {}) || {};
   } catch {}
 
-  const title = `Download ${apk.appName || 'Devastate'} APK v${apk.version || '1.0'} for Android - Safe & Verified`;
-  const description = `Download the latest verified ${apk.appName || 'Devastate'} APK (v${apk.version || '1.0'}, ${apk.size || '52.2 MB'}) for Android ${apk.androidRequired || '6.0+'}. Fast, secure, and malware-free installation.`;
+  const title = apk.seo?.title || `Download ${apk.appName || 'Devastate'} APK v${apk.version || '1.0'} for Android - Safe & Verified`;
+  const description = apk.seo?.description || `Download the latest verified ${apk.appName || 'Devastate'} APK (v${apk.version || '1.0'}, ${apk.size || '52.2 MB'}) for Android ${apk.androidRequired || '6.0+'}. Fast, secure, and malware-free installation.`;
 
   return {
     title,
     description,
     alternates: {
-      canonical: '/download',
+      canonical: apk.seo?.canonicalUrl || '/download',
     },
     openGraph: {
-      title,
-      description,
+      title: apk.seo?.ogTitle || title,
+      description: apk.seo?.ogDescription || description,
       url: '/download',
-      images: ['/pic1.webp'],
+      images: apk.seo?.ogImage ? [apk.seo.ogImage] : ['/pic1.webp'],
     },
     twitter: {
       card: 'summary_large_image',
       title,
       description,
-      images: ['/pic1.webp'],
+      images: apk.seo?.ogImage ? [apk.seo.ogImage] : ['/pic1.webp'],
     },
   };
 }
 
-export default function DownloadLayout({ children }) {
+export default async function DownloadLayout({ children }) {
   let apk = {};
   let siteSettings = {};
   try {
-    apk = readData('apkData.json') || {};
-    siteSettings = readData('siteSettings.json') || {};
+    apk = await getContent('apk', {}) || {};
+    siteSettings = await getContent('settings', {}) || {};
   } catch {}
 
   const siteUrl = siteSettings.siteUrl || 'https://thedevastate.com';

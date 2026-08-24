@@ -1,4 +1,6 @@
 import Link from 'next/link';
+import { getContent } from '@/lib/database';
+import MarkdownContent from '@/app/components/MarkdownContent';
 
 export const metadata = {
   title: "Disclaimer - Devastate APK",
@@ -8,7 +10,9 @@ export const metadata = {
   },
 };
 
-export default function DisclaimerPage() {
+export default async function DisclaimerPage() {
+  const override = await getContent('page:disclaimer', '');
+  if (override) return <main className="max-w-4xl mx-auto px-6 py-12"><MarkdownContent content={override} /></main>;
   return (
     <div
       className="max-w-4xl mx-auto px-6 sm:px-10 py-16"

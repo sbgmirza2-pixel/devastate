@@ -3,7 +3,7 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import JsonLd, { generateWebSiteSchema } from "./components/JsonLd";
-import { readData } from "@/lib/dataUtils";
+import { getContent } from "@/lib/database";
 import "./globals.css";
 
 const headingFont = Plus_Jakarta_Sans({
@@ -30,7 +30,7 @@ export async function generateMetadata() {
   };
 
   try {
-    const loaded = readData('siteSettings.json');
+    const loaded = await getContent('settings', {});
     if (loaded) siteSettings = { ...siteSettings, ...loaded };
   } catch {}
 
@@ -124,11 +124,8 @@ export async function generateMetadata() {
   };
 }
 
-export default function RootLayout({ children }) {
-  let siteSettings = {};
-  try {
-    siteSettings = readData('siteSettings.json') || {};
-  } catch {}
+export default async function RootLayout({ children }) {
+  const siteSettings = await getContent('settings', {}) || {};
 
   const gaId = siteSettings.gaMeasurementId || process.env.NEXT_PUBLIC_GA_ID;
   const webSiteSchema = generateWebSiteSchema(siteSettings);

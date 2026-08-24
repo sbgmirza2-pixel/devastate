@@ -1,11 +1,11 @@
-import { readData } from '@/lib/dataUtils';
+import { getContent } from '@/lib/database';
 
-export default function manifest() {
+export default async function manifest() {
   let siteName = 'Devastate APK';
   let siteDescription = 'Download Devastate APK for Android - Anime Simulation Game';
 
   try {
-    const settings = readData('siteSettings.json');
+    const settings = await getContent('settings', {});
     if (settings?.siteName) siteName = settings.siteName;
     if (settings?.siteDescription) siteDescription = settings.siteDescription;
   } catch {}

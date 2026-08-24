@@ -1,7 +1,8 @@
 import { NextResponse } from 'next/server';
-import { SESSION_COOKIE } from '@/lib/auth';
+import { revokeCurrentSession, SESSION_COOKIE } from '@/lib/auth';
 
 export async function POST() {
+  await revokeCurrentSession();
   const response = NextResponse.json({ success: true });
   response.cookies.set(SESSION_COOKIE, '', {
     httpOnly: true,

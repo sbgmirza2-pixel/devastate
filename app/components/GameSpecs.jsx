@@ -1,7 +1,7 @@
-import { readData } from '@/lib/dataUtils';
+import { getApk } from '@/lib/database';
 
-export default function AppInfoWithTableOfContents() {
-  let apk = {
+export default async function AppInfoWithTableOfContents() {
+  const apk = await getApk() || {
     appName: "Devastate",
     version: "1.0",
     category: "Simulation",
@@ -11,9 +11,6 @@ export default function AppInfoWithTableOfContents() {
     mainUse: "Anime-style character and story simulation",
     devices: "Android phones, tablets, and PC via emulator if preferred",
   };
-  try {
-    apk = readData('apkData.json');
-  } catch {}
 
   const specs = [
     { label: "APP NAME", value: apk.appName || "Devastate" },

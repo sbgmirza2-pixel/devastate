@@ -44,15 +44,14 @@ export function generateApkSchema(apk = {}, siteUrl = 'https://thedevastate.com'
     },
     downloadUrl: downloadUrl,
     installUrl: downloadUrl,
-    image: `${siteUrl}/Devastate-fav-icon.webp`,
+    image: apk.seo?.ogImage || apk.iconUrl || `${siteUrl}/Devastate-fav-icon.webp`,
     screenshot: [
       `${siteUrl}/pic1.webp`,
       `${siteUrl}/pic2.webp`,
       `${siteUrl}/pic3.webp`,
       `${siteUrl}/pic4.webp`,
     ],
-    description:
-      'Download Devastate APK for Android. Anime-style simulation game with 2D visuals, interactive story dialogue, tasks, items, and character customization.',
+    description: apk.seo?.description || apk.shortDescription || 'Download Devastate APK for Android. Anime-style simulation game with 2D visuals, interactive story dialogue, tasks, items, and character customization.',
   };
 
   if (reviewStats.total > 0) {

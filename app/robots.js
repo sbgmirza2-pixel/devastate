@@ -1,11 +1,11 @@
-import { readData } from '@/lib/dataUtils';
+import { getContent } from '@/lib/database';
 
-export default function robots() {
+export default async function robots() {
   let siteUrl = 'https://thedevastate.com';
   let allowIndexing = true;
 
   try {
-    const settings = readData('siteSettings.json');
+    const settings = await getContent('settings', {});
     if (settings?.siteUrl) {
       siteUrl = settings.siteUrl.replace(/\/+$/, '');
     }

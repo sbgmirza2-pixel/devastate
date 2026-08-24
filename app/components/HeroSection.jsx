@@ -1,12 +1,9 @@
 import Link from 'next/link';
-import { readData } from '@/lib/dataUtils';
+import { getApk } from '@/lib/database';
 import HeroShareButton from './HeroShareButton';
 
-export default function HeroSection() {
-  let apk = {};
-  try {
-    apk = readData('apkData.json') || {};
-  } catch {}
+export default async function HeroSection() {
+  const apk = await getApk() || {};
 
   return (
     <div className="w-full mb-12 flex flex-col items-center text-center">

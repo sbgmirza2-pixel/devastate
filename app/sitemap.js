@@ -1,19 +1,21 @@
-import { readData } from '@/lib/dataUtils';
+import { getContent } from '@/lib/database';
+import { getDatabase } from '@/lib/mongodb';
 
-export default function sitemap() {
+export default async function sitemap() {
   let siteUrl = 'https://thedevastate.com';
   let blogPosts = [];
 
   try {
-    const settings = readData('siteSettings.json');
+    const settings = await getContent('settings', {});
     if (settings?.siteUrl) {
       siteUrl = settings.siteUrl.replace(/\/+$/, '');
     }
   } catch {}
 
-  try {
-    blogPosts = readData('blogPosts.json') || [];
-  } catch {}
+  const db = await getDatabase();
+  blogPosts = db ? await db.collection('blogPosts').find({ status: { $ne: 'draft' } }).toArray() : [];
+
+  const apks = db ? await db.collection('apks').find({ status: 'published' }, { projection: { slug: 1, updatedAt: 1 } }).toArray() : [];
 
   const now = new Date().toISOString();
 
@@ -44,5 +46,6 @@ export default function sitemap() {
     priority: 0.8,
   }));
 
-  return [...staticRoutes, ...blogRoutes];
+  const apkRoutes = apks.filter((apk) => apk.slug).map((apk) => ({ url: `${siteUrl}/download/${apk.slug}`, lastModified: apk.updatedAt || now, changeFrequency: 'weekly', priority: 0.85 }));
+  return [...staticRoutes, ...blogRoutes, ...apkRoutes];
 }

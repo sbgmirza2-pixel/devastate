@@ -15,7 +15,7 @@ import FaqSection from './components/FaqSection';
 import FinalWords from './components/FinalWords';
 import ScreenshotsPage from './screenshots/page';
 import JsonLd, { generateApkSchema } from './components/JsonLd';
-import { readData } from '@/lib/dataUtils';
+import { getApk, getContent } from '@/lib/database';
 
 export const metadata = {
   title: "Devastate APK Download for Android - Anime Simulation Game",
@@ -31,13 +31,9 @@ export const metadata = {
   },
 };
 
-export default function HomePage() {
-  let apk = {};
-  let siteSettings = {};
-  try {
-    apk = readData('apkData.json') || {};
-    siteSettings = readData('siteSettings.json') || {};
-  } catch {}
+export default async function HomePage() {
+  const apk = await getApk() || {};
+  const siteSettings = await getContent('settings', {}) || {};
 
   const apkSchema = generateApkSchema(
     apk,

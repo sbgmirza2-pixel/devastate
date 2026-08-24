@@ -7,8 +7,14 @@ import Link from 'next/link';
 const NAV = [
   { href: '/admin', label: 'Dashboard', icon: '📊' },
   { href: '/admin/apk', label: 'APK Manager', icon: '📦' },
+  { href: '/admin/categories', label: 'Categories', icon: '🗂️' },
+  { href: '/admin/media', label: 'Media Library', icon: '🖼️' },
+  { href: '/admin/downloads', label: 'Downloads', icon: '⬇️' },
+  { href: '/admin/users', label: 'Admin Users', icon: '👤' },
+  { href: '/admin/activity', label: 'Activity Log', icon: '🕘' },
   { href: '/admin/blog', label: 'Blog Posts', icon: '📝' },
   { href: '/admin/settings', label: 'Site Settings', icon: '⚙️' },
+  { href: '/admin/pages', label: 'Pages', icon: '📄' },
 ];
 
 export default function AdminClientShell({ children }) {

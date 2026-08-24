@@ -1,16 +1,15 @@
 import { NextResponse } from 'next/server';
-import { readData, writeData } from '@/lib/dataUtils';
-import { isAuthenticated } from '@/lib/auth';
+import { hasPermission } from '@/lib/auth';
 import { normalizeBlogContent } from '@/lib/normalizeBlogContent';
+import { getDatabase } from '@/lib/mongodb';
 
 // GET /api/blog/[slug] — public
 export async function GET(request, { params }) {
   const { slug } = await params;
   try {
-    const posts = readData('blogPosts.json');
-    const post = posts.find((p) => p.slug === slug);
+    const post = await (await getDatabase()).collection('blogPosts').findOne({ slug, status: { $ne: 'draft' } });
     if (!post) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-    return NextResponse.json(post);
+    return NextResponse.json({ ...post, _id: post._id.toString() });
   } catch {
     return NextResponse.json({ error: 'Server error' }, { status: 500 });
   }
@@ -18,23 +17,17 @@ export async function GET(request, { params }) {
 
 // PUT /api/blog/[slug] — admin-protected, update post
 export async function PUT(request, { params }) {
-  const authed = await isAuthenticated();
-  if (!authed) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!await hasPermission('blog:write')) return NextResponse.json({ error: 'Permission denied' }, { status: 403 });
 
   const { slug } = await params;
   try {
     const updates = await request.json();
-    const posts = readData('blogPosts.json');
-    const index = posts.findIndex((p) => p.slug === slug);
-    if (index === -1) return NextResponse.json({ error: 'Not found' }, { status: 404 });
-
-    posts[index] = {
-      ...posts[index],
-      ...updates,
-      ...(updates.content ? { content: normalizeBlogContent(updates.content) } : {}),
-    };
-    writeData('blogPosts.json', posts);
-    return NextResponse.json(posts[index]);
+    const db = await getDatabase();
+    const current = await db.collection('blogPosts').findOne({ slug });
+    if (!current) return NextResponse.json({ error: 'Not found' }, { status: 404 });
+    const next = { ...updates, ...(updates.content ? { content: normalizeBlogContent(updates.content) } : {}), updatedAt: new Date() };
+    const result = await db.collection('blogPosts').findOneAndUpdate({ _id: current._id }, { $set: next }, { returnDocument: 'after' });
+    return NextResponse.json({ ...result, _id: result._id.toString() });
   } catch {
     return NextResponse.json({ error: 'Failed to update post' }, { status: 500 });
   }
@@ -42,17 +35,13 @@ export async function PUT(request, { params }) {
 
 // DELETE /api/blog/[slug] — admin-protected
 export async function DELETE(request, { params }) {
-  const authed = await isAuthenticated();
-  if (!authed) return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  if (!await hasPermission('blog:delete')) return NextResponse.json({ error: 'Permission denied' }, { status: 403 });
 
   const { slug } = await params;
   try {
-    const posts = readData('blogPosts.json');
-    const filtered = posts.filter((p) => p.slug !== slug);
-    if (filtered.length === posts.length) {
-      return NextResponse.json({ error: 'Not found' }, { status: 404 });
-    }
-    writeData('blogPosts.json', filtered);
+    const db = await getDatabase();
+    const result = await db.collection('blogPosts').deleteOne({ slug });
+    if (!result.deletedCount) return NextResponse.json({ error: 'Not found' }, { status: 404 });
     return NextResponse.json({ success: true });
   } catch {
     return NextResponse.json({ error: 'Failed to delete post' }, { status: 500 });

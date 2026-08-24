@@ -1,12 +1,13 @@
 import { NextResponse } from 'next/server';
-import { readData, writeData } from '@/lib/dataUtils';
-import { isAuthenticated } from '@/lib/auth';
+import { hasPermission } from '@/lib/auth';
 import { normalizeBlogContent } from '@/lib/normalizeBlogContent';
+import { getDatabase } from '@/lib/mongodb';
 
 // GET /api/blog — public, returns all blog posts
 export async function GET() {
   try {
-    const posts = readData('blogPosts.json');
+    const posts = await (await getDatabase()).collection('blogPosts').find({ status: { $ne: 'draft' } }).sort({ date: -1, createdAt: -1 }).toArray();
+    posts.forEach((post) => { post._id = post._id.toString(); });
     return NextResponse.json(posts);
   } catch {
     return NextResponse.json([], { status: 200 });
@@ -15,8 +16,7 @@ export async function GET() {
 
 // POST /api/blog — admin-protected, add new post
 export async function POST(request) {
-  const authed = await isAuthenticated();
-  if (!authed) {
+  if (!await hasPermission('blog:write')) {
     return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
   }
 
@@ -28,24 +28,16 @@ export async function POST(request) {
       return NextResponse.json({ error: 'Missing required fields: slug, title, content' }, { status: 400 });
     }
 
-    const posts = readData('blogPosts.json');
-
-    // Check for duplicate slug
-    if (posts.find((p) => p.slug === newPost.slug)) {
-      return NextResponse.json({ error: 'A post with this slug already exists' }, { status: 409 });
-    }
-
     const post = {
-      id: Date.now().toString(),
+      status: newPost.status === 'draft' ? 'draft' : 'published',
       date: new Date().toISOString().split('T')[0],
       ...newPost,
       content: normalizeBlogContent(newPost.content),
+      createdAt: new Date(),
+      updatedAt: new Date(),
     };
-
-    posts.unshift(post); // newest first
-    writeData('blogPosts.json', posts);
-
-    return NextResponse.json(post, { status: 201 });
+    const result = await (await getDatabase()).collection('blogPosts').insertOne(post);
+    return NextResponse.json({ ...post, _id: result.insertedId.toString() }, { status: 201 });
   } catch {
     return NextResponse.json({ error: 'Failed to create post' }, { status: 500 });
   }
