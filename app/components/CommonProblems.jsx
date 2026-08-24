@@ -54,7 +54,7 @@ export default function CommonProblems() {
             Common Installation Problems and Their Solutions
           </h2>
 
-          {/* Problems List */}
+          {/* Problems list */}
           <div className="w-full space-y-8">
             {problems.map((item, index) => (
               <div key={index} className="w-full">
