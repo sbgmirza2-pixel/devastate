@@ -87,7 +87,7 @@ export default function DmcaPolicyPage() {
           </p>
         </section>
 
-        {/* Contact */}
+        {/* contact */}
         <section className="space-y-4">
           <h2
             className="text-xl sm:text-2xl font-bold text-black uppercase"
