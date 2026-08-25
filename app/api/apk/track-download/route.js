@@ -1,7 +1,7 @@
 import { NextResponse } from 'next/server';
 import { getDatabase } from '@/lib/mongodb';
 
-// POST /api/apk/track-download — public, increments download counter
+// POST /api/apk/track-download— public,increments download counter
 export async function POST() {
   try {
     const db = await getDatabase();
