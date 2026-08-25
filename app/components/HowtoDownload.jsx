@@ -1,30 +1,22 @@
-export default function HowToDownload() {
-  const downloadSteps = [
-    "Visit a trusted download source.",
-    "Make sure the page matches the correct game.",
-    "Check the listed version.",
-    "Compare the file size.",
-    "Confirm your Android version is supported.",
-    "Start the download.",
-    "Wait until the file is completely saved.",
-    "Check the file before installing it.",
-    "Avoid clicking random download buttons that appear through pop-ups."
-  ];
+import { defaultHomeContent } from '@/lib/homeDefaults';
+
+export default function HowToDownload({ content }) {
+  const data = content || defaultHomeContent.download;
+  const downloadSteps = data.steps || defaultHomeContent.download.steps;
 
   return (
-    // w-screen and background preserved with responsive side padding inner wrapper
-    <div id="how-to-download" className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12 py-12 bg-black/[0.03]">
-      <div className="px-6 sm:px-12 lg:px-24 xl:px-48">
+    <section id="how-to-download" className="w-full py-12 sm:py-16 bg-black/[0.06] text-left scroll-mt-20 sm:scroll-mt-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="w-full flex flex-col items-start">
           
           {/* Section Heading */}
           <h2 className="text-2xl sm:text-3xl font-black text-black mb-6 uppercase tracking-wide">
-            How to Download Devastate APK
+            {data.heading || "How to Download Devastate APK"}
           </h2>
 
           {/* Intro Paragraph */}
           <p className="text-base sm:text-lg text-black/90 leading-relaxed font-normal mb-8">
-            You can download the APK by following these basic steps:
+            {data.intro || "You can download the APK by following these basic steps:"}
           </p>
 
           {/* Steps List */}
@@ -39,6 +31,6 @@ export default function HowToDownload() {
 
         </div>
       </div>
-    </div>
+    </section>
   );
 }

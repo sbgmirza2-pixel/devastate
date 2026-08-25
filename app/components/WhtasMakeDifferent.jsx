@@ -1,29 +1,22 @@
-export default function WhatMakesDifferent() {
-  const features = [
-    {
-      title: "Story-Focused Gameplay",
-      text: "The gameplay puts more attention on conversations, characters, and the situations you encounter along the way. Instead of rushing through levels, you can take your time exploring scenes, following the story, completing tasks, and seeing how the available content develops."
-    },
-    {
-      title: "Interactive Character Experience",
-      text: "Characters play an important role throughout the game. You can interact with them, follow their conversations, and see different situations as they progress. These interactions make the experience feel more personal and give you something to explore beyond the usual gameplay found in simple mobile games."
-    }
-  ];
+import { defaultHomeContent } from '@/lib/homeDefaults';
+
+export default function WhatMakesDifferent({ content }) {
+  const data = content || defaultHomeContent.different;
+  const features = data.items || defaultHomeContent.different.items;
 
   return (
-    // Background and full width kept, padding applied to the inner container
-    <div  id = "what-makes-different" className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12 py-12 bg-black/[0.06]">
-      <div className="px-6 sm:px-12 lg:px-24 xl:px-48">
+    <section id="what-makes-different" className="w-full py-12 sm:py-16 bg-black/[0.06] text-left scroll-mt-20 sm:scroll-mt-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="w-full flex flex-col items-start">
           
           {/* Section Heading */}
           <h2 className="text-2xl sm:text-3xl font-black text-black mb-6 uppercase tracking-wide">
-            What Makes Devastate Different?
+            {data.heading || "What Makes Devastate Different?"}
           </h2>
 
           {/* Intro Paragraph */}
           <p className="text-base sm:text-lg text-black/90 leading-relaxed font-normal mb-8">
-            Devastate stands out with its character-focused gameplay, interactive conversations, and slower pace, giving you more time to explore and enjoy the experience.
+            {data.intro || "Devastate stands out with its character-focused gameplay, interactive conversations, and slower pace, giving you more time to explore and enjoy the experience."}
           </p>
 
           {/* Sub-sections */}
@@ -41,6 +34,6 @@ export default function WhatMakesDifferent() {
           </div>
         </div>
       </div>
-    </div>
+    </section>
   );
 }

@@ -1,27 +1,22 @@
-export default function DeviceCompatibility() {
-  const requirements = [
-    { label: "Android", value: "6.0 or newer" },
-    { label: "APK Size", value: "52.21 MB" },
-    { label: "Platform", value: "Android" },
-    { label: "Controls", value: "Touch" },
-    { label: "Installation", value: "Manual APK" },
-    { label: "Storage", value: "Extra free space recommended" },
-  ];
+import { defaultHomeContent } from '@/lib/homeDefaults';
+
+export default function DeviceCompatibility({ content }) {
+  const data = content || defaultHomeContent.requirements;
+  const requirements = data.items || defaultHomeContent.requirements.items;
 
   return (
-    // w-screen & background preserved with responsive side padding inner wrapper
-    <div id ="requirements" className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12 py-12 bg-black/[0.06]">
-      <div className="px-6 sm:px-12 lg:px-24 xl:px-48">
+    <section id="requirements" className="w-full py-12 sm:py-16 bg-black/[0.03] text-left scroll-mt-20 sm:scroll-mt-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="w-full flex flex-col items-start">
           
           {/* Section Heading */}
           <h2 className="text-2xl sm:text-3xl font-black text-black mb-6 uppercase tracking-wide">
-            Android Requirements and Device Compatibility
+            {data.heading || "Android Requirements and Device Compatibility"}
           </h2>
 
           {/* Descriptive Text */}
           <p className="text-base sm:text-lg text-black/90 leading-relaxed font-normal mb-8">
-            Before installing, make sure your device meets the listed minimum requirement.
+            {data.description || "Before installing, make sure your device meets the listed minimum requirement."}
           </p>
 
           {/* Requirements Table / Grid */}
@@ -43,16 +38,13 @@ export default function DeviceCompatibility() {
 
           {/* Additional Notes */}
           <div className="w-full space-y-4 text-base sm:text-lg text-black/90 leading-relaxed font-normal">
-            <p>
-              The listed APK is around 52 MB, but it is still a good idea to keep additional storage available for temporary files and game data.
-            </p>
-            <p>
-              Performance can also vary depending on your phone's RAM, processor, Android version, and available storage.
-            </p>
+            {(data.notes || []).map((note, nIdx) => (
+              <p key={nIdx}>{note}</p>
+            ))}
           </div>
 
         </div>
       </div>
-    </div>
+    </section>
   );
 }

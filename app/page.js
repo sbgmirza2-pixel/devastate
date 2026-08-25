@@ -16,6 +16,7 @@ import FinalWords from './components/FinalWords';
 import ScreenshotsPage from './screenshots/page';
 import JsonLd, { generateApkSchema } from './components/JsonLd';
 import { getApk, getContent } from '@/lib/database';
+import { defaultHomeContent } from '@/lib/homeDefaults';
 
 export const metadata = {
   title: "Devastate APK Download for Android - Anime Simulation Game",
@@ -34,6 +35,10 @@ export const metadata = {
 export default async function HomePage() {
   const apk = await getApk() || {};
   const siteSettings = await getContent('settings', {}) || {};
+  const savedHomeContent = await getContent('page:home', null);
+  
+  // Merge saved home content with defaultHomeContent
+  const home = savedHomeContent ? { ...defaultHomeContent, ...savedHomeContent } : defaultHomeContent;
 
   const apkSchema = generateApkSchema(
     apk,
@@ -41,24 +46,24 @@ export default async function HomePage() {
   );
 
   return (
-    <div className="w-full px-4 sm:px-8 lg:px-12 py-10" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
+    <main className="w-full flex flex-col" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
       <JsonLd data={apkSchema} />
-      <HeroSection />
-      <GameSpecs />
-      <ScreenshotsPage />
-      <WhatIsDevastate />
-      <GameFeatures />  
-      <GamePlayGuide />
-      <DeviceCompatibility />
-      <WhatMakesDifferent />
-      <HowToUpdate />
-      <BeforeYouInstall />
-      <HowToDownload />
-      <HowtoInstall />
-      <CommonProblems />
-      <PropsandCorn />
-      <FaqSection />
-      <FinalWords />
-    </div>
+      <HeroSection content={home.hero} apkData={apk} />
+      <GameSpecs content={home.specs} apkData={apk} />
+      <ScreenshotsPage content={home.screenshots} />
+      <WhatIsDevastate content={home.whatIs} />
+      <GameFeatures content={home.features} />  
+      <GamePlayGuide content={home.gameplay} />
+      <DeviceCompatibility content={home.requirements} />
+      <WhatMakesDifferent content={home.different} />
+      <HowToUpdate content={home.update} />
+      <BeforeYouInstall content={home.beforeInstall} />
+      <HowToDownload content={home.download} />
+      <HowtoInstall content={home.install} />
+      <CommonProblems content={home.problems} />
+      <PropsandCorn content={home.prosCons} />
+      <FaqSection content={home.faq} />
+      <FinalWords content={home.finalWords} />
+    </main>
   );
 }

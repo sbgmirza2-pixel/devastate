@@ -1,65 +1,24 @@
 "use client";
 
 import React, { useState } from "react";
+import { defaultHomeContent } from "@/lib/homeDefaults";
 
-export default function FAQ() {
+export default function FAQ({ content }) {
   const [openIndex, setOpenIndex] = useState(null);
-
-  const faqs = [
-    {
-      question: "What is Devastate?",
-      answer:
-        "Devastate is an anime-style interactive simulation game for Android featuring characters, conversations, and tasks.",
-    },
-    {
-      question: "What is Devastate APK?",
-      answer:
-        "Devastate APK is the Android installation package for the Devastate simulation game featuring 2D visuals and character interactions.",
-    },
-    {
-      question: "What is the package name of Devastate?",
-      answer: "The listed package name is com.devastate.android.",
-    },
-    {
-      question: "Who developed Devastate?",
-      answer: "It is developed by Devastate DEV.",
-    },
-    {
-      question: "What type of game is Devastate?",
-      answer:
-        "It is an interactive simulation game with anime-style visuals, dialogue, and visual-novel elements.",
-    },
-    {
-      question: "Does Devastate have 2D visuals?",
-      answer:
-        "Yes. Its presentation uses anime-inspired 2D characters and scenes.",
-    },
-    {
-      question: "Does Devastate have dialogue choices?",
-      answer:
-        "Dialogue and character interaction are key parts of the experience, varying by version.",
-    },
-    {
-      question: "Does Devastate have item-based gameplay?",
-      answer:
-        "Yes, items add another layer beyond dialogue, becoming part of tasks and interactions.",
-    },
-  ];
+  const data = content || defaultHomeContent.faq;
+  const faqs = data.items || defaultHomeContent.faq.items;
 
   const toggleFAQ = (index) => {
     setOpenIndex(openIndex === index ? null : index);
   };
 
   return (
-    <section
-      id="faq"
-      className="w-full mb-12 bg-black/[0.04] py-12"
-    >
-      <div className="w-full max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
+    <section id="faq" className="w-full py-12 sm:py-16 bg-black/[0.06] text-left scroll-mt-20 sm:scroll-mt-24">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
         {/* Heading */}
-        <h2 className="text-xl sm:text-2xl font-black text-black mb-8 uppercase tracking-wide text-center">
-          Frequently Asked Questions
+        <h2 className="text-2xl sm:text-3xl font-black text-black mb-8 uppercase tracking-wide text-center">
+          {data.heading || "Frequently Asked Questions"}
         </h2>
 
         {/* FAQ List */}
@@ -76,7 +35,7 @@ export default function FAQ() {
                 <button
                   type="button"
                   onClick={() => toggleFAQ(index)}
-                  className="w-full min-w-0 px-4 sm:px-5 py-4 flex items-center justify-between gap-3 text-left focus:outline-none"
+                  className="w-full min-w-0 px-4 sm:px-5 py-4 flex items-center justify-between gap-3 text-left focus:outline-none cursor-pointer"
                 >
                   <div className="min-w-0 flex-1 flex items-start gap-3">
                     <span className="w-2 h-2 mt-2 bg-black rounded-full flex-shrink-0"></span>

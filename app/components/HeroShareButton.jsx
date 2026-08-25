@@ -10,12 +10,20 @@ export default function HeroShareButton({ appName }) {
   const shareUrl = encodeURIComponent(currentUrl);
 
   return (
-    <div className="relative inline-block text-left">
+    <>
       <button
+        type="button"
         onClick={() => setIsOpen(true)}
-        className="text-black font-black uppercase tracking-wider hover:underline cursor-pointer text-xs bg-black/5 px-3 py-1.5 rounded-md border border-black/10 transition"
+        className="w-full h-full flex items-center justify-center gap-2 px-4 py-3 text-xs sm:text-sm font-bold uppercase tracking-wider text-black hover:bg-black/5 active:bg-black/10 transition-colors cursor-pointer select-none"
       >
-        Share App
+        <svg 
+          className="w-4 h-4 shrink-0 fill-current" 
+          viewBox="0 0 24 24"
+          style={{ width: '16px', height: '16px', minWidth: '16px', minHeight: '16px' }}
+        >
+          <path d="M18 16.08c-.76 0-1.44.3-1.96.77L8.91 12.7c.05-.23.09-.46.09-.7s-.04-.47-.09-.7l7.05-4.11c.54.5 1.25.81 2.04.81 1.66 0 3-1.34 3-3s-1.34-3-3-3-3 1.34-3 3c0 .24.04.47.09.7L8.04 9.81C7.5 9.31 6.79 9 6 9c-1.66 0-3 1.34-3 3s1.34 3 3 3c.79 0 1.5-.31 2.04-.81l7.12 4.16c-.05.21-.08.43-.08.65 0 1.61 1.31 2.92 2.92 2.92s2.92-1.31 2.92-2.92c0-1.61-1.31-2.92-2.92-2.92z"/>
+        </svg>
+        <span>Share App</span>
       </button>
 
       {/* Modal Overlay */}
@@ -34,6 +42,7 @@ export default function HeroShareButton({ appName }) {
                 </h3>
               </div>
               <button
+                type="button"
                 onClick={() => setIsOpen(false)}
                 className="text-black/60 hover:text-black transition p-1 text-sm font-bold cursor-pointer"
               >
@@ -106,74 +115,65 @@ export default function HeroShareButton({ appName }) {
                 </a>
 
                 {/* Reddit */}
-<a
-  href={`https://www.reddit.com/submit?url=${shareUrl}&title=${shareText}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="h-20 bg-[#ff4500] hover:opacity-90 rounded-xl flex flex-col items-center justify-center gap-1.5 transition shadow-sm text-white"
-  title="Reddit"
->
-  <img
-    src="https://cdn.simpleicons.org/reddit/ffffff"
-    alt="Reddit"
-    className="w-6 h-"
-  />
-
-  <span className="text-[10px] font-bold">
-    Reddit
-  </span>
-</a>
+                <a
+                  href={`https://www.reddit.com/submit?url=${shareUrl}&title=${shareText}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-20 bg-[#ff4500] hover:opacity-90 rounded-xl flex flex-col items-center justify-center gap-1.5 transition shadow-sm text-white"
+                  title="Reddit"
+                >
+                  <img
+                    src="https://cdn.simpleicons.org/reddit/ffffff"
+                    alt="Reddit"
+                    className="w-6 h-6"
+                  />
+                  <span className="text-[10px] font-bold">Reddit</span>
+                </a>
 
                 {/* Pinterest */}
-<a
-  href={`https://pinterest.com/pin/create/button/?url=${shareUrl}&description=${shareText}`}
-  target="_blank"
-  rel="noopener noreferrer"
-  className="h-20 bg-[#e60023] hover:opacity-90 rounded-xl flex flex-col items-center justify-center gap-1.5 transition shadow-sm text-white"
-  title="Pinterest"
->
-  <img
-    src="https://cdn.simpleicons.org/pinterest/ffffff"
-    alt="Pinterest"
-    className="w-6 h-6"
-  />
+                <a
+                  href={`https://pinterest.com/pin/create/button/?url=${shareUrl}&description=${shareText}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="h-20 bg-[#e60023] hover:opacity-90 rounded-xl flex flex-col items-center justify-center gap-1.5 transition shadow-sm text-white"
+                  title="Pinterest"
+                >
+                  <img
+                    src="https://cdn.simpleicons.org/pinterest/ffffff"
+                    alt="Pinterest"
+                    className="w-6 h-6"
+                  />
+                  <span className="text-[10px] font-bold">Pinterest</span>
+                </a>
 
-  <span className="text-[10px] font-bold">
-    Pinterest
-  </span>
-</a>
-
-               {/* Email */}
-<a
-  href={`mailto:?subject=${shareText}&body=${shareUrl}`}
-  className="h-20 bg-[#555555] hover:opacity-90 rounded-xl flex flex-col items-center justify-center gap-1.5 transition shadow-sm text-white"
-  title="Email"
->
-  <svg
-    className="w-6 h-6"
-    viewBox="0 0 24 24"
-    fill="none"
-    xmlns="http://www.w3.org/2000/svg"
-  >
-    <path
-      d="M3 6.5C3 5.67157 3.67157 5 4.5 5H19.5C20.3284 5 21 5.67157 21 6.5V17.5C21 18.3284 20.3284 19 19.5 19H4.5C3.67157 19 3 18.3284 3 17.5V6.5Z"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinejoin="round"
-    />
-    <path
-      d="M4 7L12 13L20 7"
-      stroke="currentColor"
-      strokeWidth="1.8"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-    />
-  </svg>
-
-  <span className="text-[10px] font-bold">
-    Email
-  </span>
-</a>
+                {/* Email */}
+                <a
+                  href={`mailto:?subject=${shareText}&body=${shareUrl}`}
+                  className="h-20 bg-[#555555] hover:opacity-90 rounded-xl flex flex-col items-center justify-center gap-1.5 transition shadow-sm text-white"
+                  title="Email"
+                >
+                  <svg
+                    className="w-6 h-6"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
+                    <path
+                      d="M3 6.5C3 5.67157 3.67157 5 4.5 5H19.5C20.3284 5 21 5.67157 21 6.5V17.5C21 18.3284 20.3284 19 19.5 19H4.5C3.67157 19 3 18.3284 3 17.5V6.5Z"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinejoin="round"
+                    />
+                    <path
+                      d="M4 7L12 13L20 7"
+                      stroke="currentColor"
+                      strokeWidth="1.8"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                    />
+                  </svg>
+                  <span className="text-[10px] font-bold">Email</span>
+                </a>
 
               </div>
             </div>
@@ -181,6 +181,6 @@ export default function HeroShareButton({ appName }) {
           </div>
         </div>
       )}
-    </div>
+    </>
   );
 }

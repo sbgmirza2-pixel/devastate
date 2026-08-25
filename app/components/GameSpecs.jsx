@@ -1,7 +1,9 @@
 import { getApk } from '@/lib/database';
+import { defaultHomeContent } from '@/lib/homeDefaults';
+import TableOfContentsList from './TableOfContentsList';
 
-export default async function AppInfoWithTableOfContents() {
-  const apk = await getApk() || {
+export default async function AppInfoWithTableOfContents({ content, apkData }) {
+  const apk = apkData || await getApk() || {
     appName: "Devastate",
     version: "1.0",
     category: "Simulation",
@@ -11,6 +13,8 @@ export default async function AppInfoWithTableOfContents() {
     mainUse: "Anime-style character and story simulation",
     devices: "Android phones, tablets, and PC via emulator if preferred",
   };
+
+  const specsConfig = content || defaultHomeContent.specs;
 
   const specs = [
     { label: "APP NAME", value: apk.appName || "Devastate" },
@@ -40,23 +44,26 @@ export default async function AppInfoWithTableOfContents() {
   ];
 
   return (
-    <div className="relative w-screen left-1/2 right-1/2 -ml-[50vw] -mr-[50vw] mb-12 py-16 bg-black/[0.03] text-left">
-      <div className="px-6 sm:px-12 lg:px-24 xl:px-48">
-        <div className="w-full max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16">
+    <section id="app-info" className="w-full py-12 sm:py-16 bg-black/[0.03] text-left scroll-mt-28">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="w-full grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12 items-start">
           
           {/* Left Side: App Information */}
           <div className="lg:col-span-7 flex flex-col items-start">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-black mb-10">
-              App Information
+            <h2 className="text-2xl sm:text-4xl font-bold text-black mb-6 tracking-tight uppercase border-b-2 border-black pb-3 w-full">
+              {specsConfig.heading || "App Information"}
             </h2>
 
-            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-x-10 gap-y-8">
+            <div className="w-full grid grid-cols-1 sm:grid-cols-2 gap-3.5">
               {specs.map((item, index) => (
-                <div key={index} className="flex flex-col border-b border-black/20 pb-6">
-                  <span className="text-[11px] sm:text-[12px] font-bold text-black/70 uppercase tracking-widest mb-2">
+                <div 
+                  key={index} 
+                  className="bg-white/80 border border-black/10 rounded-xl p-4 shadow-xs hover:border-black/30 transition-colors flex flex-col justify-center"
+                >
+                  <span className="text-[10px] sm:text-[11px] font-bold text-black/55 uppercase tracking-wider mb-1">
                     {item.label}
                   </span>
-                  <span className="text-sm sm:text-base font-normal text-black tracking-wide break-words">
+                  <span className="text-sm sm:text-base font-semibold text-black tracking-wide break-words">
                     {item.value}
                   </span>
                 </div>
@@ -65,27 +72,15 @@ export default async function AppInfoWithTableOfContents() {
           </div>
 
           {/* Right Side: Table of Contents */}
-          <div className="lg:col-span-5 flex flex-col items-start lg:border-l lg:border-black/20 lg:pl-12 relative z-10">
-            <h2 className="text-3xl sm:text-4xl font-serif font-bold text-black mb-10">
-              Table of Contents
-            </h2>
-
-            <ul className="w-full space-y-4">
-              {tableOfContents.map((item, index) => (
-                <li key={index} className="border-b border-black/20 pb-4">
-                  <a 
-                    href={item.href} 
-                    className="text-sm sm:text-base font-normal text-black/90 hover:text-black underline decoration-black/40 hover:decoration-black transition-all duration-200 block py-1 cursor-pointer"
-                  >
-                    {item.title}
-                  </a>
-                </li>
-              ))}
-            </ul>
+          <div className="lg:col-span-5 flex flex-col items-start w-full sticky top-24">
+            <TableOfContentsList 
+              items={tableOfContents} 
+              headingTitle={specsConfig.tocHeading || "Table of Contents"} 
+            />
           </div>
 
         </div>
       </div>
-    </div>
+    </section>
   );
 }
