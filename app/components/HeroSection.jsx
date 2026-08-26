@@ -38,30 +38,34 @@ export default async function HeroSection({ content, apkData }) {
           </div>
 
           {/* White Theme Bordered Box - 50/50 split (Half Rating & Half Share Button with Divider) */}
-          <div className="w-full max-w-md mx-auto grid grid-cols-2 bg-white border border-black/20 rounded-2xl shadow-sm overflow-hidden divide-x divide-black/20">
-            {/* Left Half: Rating & Review */}
-            <div 
-              className="flex flex-col sm:flex-row items-center justify-center gap-1.5 sm:gap-2 px-3 sm:px-4 py-3 select-none text-center bg-white" 
-              aria-label={`Rated ${hero.ratingScore || '4.5/5'} from ${hero.ratingReviews || '19k reviews'}`}
-            >
-              <span className="flex items-center text-sm sm:text-base leading-none tracking-wide" aria-hidden="true">
-                <span className="text-amber-500">★★★★</span>
-                <span className="relative inline-block text-black/15">
-                  ★
-                  <span className="absolute inset-y-0 left-0 w-1/2 overflow-hidden text-amber-500">★</span>
-                </span>
-              </span>
-              <span className="text-[11px] sm:text-xs font-bold text-black/80 whitespace-nowrap">
-                {hero.ratingScore || '4.5/5'} · {hero.ratingReviews || '19k reviews'}
-              </span>
-            </div>
+         <div className="w-fit max-w-full mx-auto flex items-stretch bg-white border border-black/20 rounded-2xl shadow-sm overflow-hidden">
+  
+  {/* Rating */}
+  <div
+    className="flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-3 select-none text-center bg-white whitespace-nowrap"
+    aria-label={`Rated ${hero.ratingScore || '4.5/5'} from ${hero.ratingReviews || '19k reviews'}`}
+  >
+    <span className="flex items-center text-sm sm:text-base leading-none tracking-wide" aria-hidden="true">
+      <span className="text-amber-500">★★★★</span>
+      <span className="relative inline-block text-black/15">
+        ★
+        <span className="absolute inset-y-0 left-0 w-1/2 overflow-hidden text-amber-500">
+          ★
+        </span>
+      </span>
+    </span>
 
-            {/* Right Half: Share Button */}
-            <div className="flex items-stretch justify-stretch bg-white">
-              <HeroShareButton appName={appName} />
-            </div>
-          </div>
+    <span className="text-[11px] sm:text-xs font-bold text-black/80 whitespace-nowrap">
+      {hero.ratingScore || '4.5/5'} · {hero.ratingReviews || '19k reviews'}
+    </span>
+  </div>
 
+  {/* Divider + Share */}
+  <div className="flex items-stretch bg-white border-l border-black/20">
+    <HeroShareButton appName={appName} />
+  </div>
+
+</div>
         </div>
 
       </div>
