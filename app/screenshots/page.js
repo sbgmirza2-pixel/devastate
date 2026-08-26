@@ -13,46 +13,50 @@ export default function ScreenshotsPage({ content }) {
   const screenshots = data.images && data.images.length > 0 ? data.images : defaultHomeContent.screenshots.images;
 
   return (
-    <section id="screenshots" className="w-full py-10 sm:py-14 bg-transparent text-left">
+    <section id="screenshots" className="w-full py-12 md:py-16 bg-transparent text-left">
       <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         
-        {/* Heading */}
-        <h2 className="text-2xl sm:text-4xl font-bold text-black mb-3 tracking-wide uppercase border-b-2 border-black pb-3">
-          {data.heading || "Screenshots"}
-        </h2>
+        {/* Section Heading */}
+        <div className="mb-6">
+          <h2 className="text-2xl sm:text-3xl md:text-4xl font-extrabold text-black tracking-tight uppercase inline-block border-b-4 border-black pb-2">
+            {data.heading || "Gameplay Screenshots"}
+          </h2>
+        </div>
         
         {/* Description */}
         <div 
-          className="text-black/80 text-base sm:text-lg leading-relaxed mb-6" 
+          className="text-neutral-700 text-base sm:text-lg leading-relaxed mb-8 max-w-4xl" 
           style={{ fontFamily: 'var(--font-roboto), sans-serif' }}
         >
           <p>
-            {data.description || "Explore the in-game interface, control panels, and interactive elements designed for your device."}
+            {data.description || "Explore the in-game interface, graphics, and immersive action captured directly from the game."}
           </p>
         </div>
 
-        {/* Screenshots Container - Mobile: 1 image covers full container width with smooth snap scroll */}
-        <div className="w-full overflow-x-auto pb-4 pt-1 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-gray-400">
-          <div className="flex sm:grid sm:grid-cols-2 lg:flex lg:flex-row gap-4 sm:gap-6 w-full">
+        {/* Horizontal Scroll Container */}
+        <div className="w-full overflow-x-auto pb-6 pt-2 snap-x snap-mandatory scrollbar-thin scrollbar-thumb-black scrollbar-track-neutral-200">
+          <div className="flex gap-6 w-max">
             {screenshots.map((item, index) => (
               <div 
                 key={index}
-                className="w-full min-w-full sm:min-w-0 sm:w-full lg:flex-1 shrink-0 snap-center overflow-hidden rounded-xl border-2 border-black/80 shadow-md transition hover:scale-[1.01] duration-300 bg-white"
+                className="w-[calc(100vw-3rem)] sm:w-[450px] md:w-[540px] shrink-0 snap-center group relative overflow-hidden rounded-xl border-2 border-black bg-white shadow-[4px_4px_0px_0px_rgba(0,0,0,1)] transition-all duration-300 hover:translate-x-[-2px] hover:translate-y-[-2px] hover:shadow-[6px_6px_0px_0px_rgba(0,0,0,1)]"
               >
-                <img 
-                  src={item.src} 
-                  alt={item.alt || `Gameplay Screenshot ${index + 1}`} 
-                  className="w-full h-auto object-cover aspect-video"
-                  loading="lazy"
-                />
+                <div className="overflow-hidden aspect-video w-full bg-neutral-100">
+                  <img 
+                    src={item.src} 
+                    alt={item.alt || `Gameplay Screenshot ${index + 1}`} 
+                    className="w-full h-full object-cover object-center transition-transform duration-500 group-hover:scale-105"
+                    loading="lazy"
+                  />
+                </div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Mobile Swipe Hint */}
-        <div className="flex sm:hidden items-center justify-center gap-1.5 pt-2 text-xs text-black/50 font-medium">
-          <span>← Swipe to view all screenshots →</span>
+        {/* Swipe Hint for Users */}
+        <div className="flex items-center justify-center gap-1.5 pt-2 text-xs text-neutral-500 font-medium">
+          <span>← Swipe horizontally to view all screenshots →</span>
         </div>
 
       </div>
