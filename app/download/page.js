@@ -78,7 +78,8 @@ export default function DownloadPage() {
             Download {apk.appName || 'Devastate'} APK
           </h1>
           <p className="text-base sm:text-lg leading-relaxed text-black/80 mt-4">
-            Get the secure and verified Android Package Kit file for Devastate. Please wait a few seconds while we prepare your file. Once the timer finishes, click the download button to save the APK to your device.
+            Download The <Link href="/" className="font-semibold underline underline-offset-4 hover:text-black/70">Devastate APK</Link> with the latest file details, Android requirements, version info, and a direct download link.
+The download is almost ready. Just wait for the timer to end, and the buttons will appear below.
           </p>
         </div>
 
