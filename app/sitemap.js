@@ -1,25 +1,8 @@
-import { getContent } from '@/lib/database';
-import { getDatabase } from '@/lib/mongodb';
-
 export default async function sitemap() {
-  let siteUrl = 'https://thedevastate.com';
-  let blogPosts = [];
-
-  try {
-    const settings = await getContent('settings', {});
-    if (settings?.siteUrl) {
-      siteUrl = settings.siteUrl.replace(/\/+$/, '');
-    }
-  } catch {}
-
-  const db = await getDatabase();
-  blogPosts = db ? await db.collection('blogPosts').find({ status: { $ne: 'draft' } }).toArray() : [];
-
-  const apks = db ? await db.collection('apks').find({ status: 'published' }, { projection: { slug: 1, updatedAt: 1 } }).toArray() : [];
-
+  const siteUrl = 'https://thedevastate.com';
   const now = new Date().toISOString();
 
-  // Static routes
+  // Static routes (No database dependency)
   const staticRoutes = [
     { url: `${siteUrl}/`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
     { url: `${siteUrl}/download`, lastModified: now, changeFrequency: 'daily', priority: 0.95 },
@@ -38,14 +21,5 @@ export default async function sitemap() {
     { url: `${siteUrl}/dmca`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
   ];
 
-  // Dynamic blog routes
-  const blogRoutes = blogPosts.map((post) => ({
-    url: `${siteUrl}/blog/${post.slug}`,
-    lastModified: post.date ? new Date(post.date).toISOString() : now,
-    changeFrequency: 'weekly',
-    priority: 0.8,
-  }));
-
-  const apkRoutes = apks.filter((apk) => apk.slug).map((apk) => ({ url: `${siteUrl}/download/${apk.slug}`, lastModified: apk.updatedAt || now, changeFrequency: 'weekly', priority: 0.85 }));
-  return [...staticRoutes, ...blogRoutes, ...apkRoutes];
+  return staticRoutes;
 }

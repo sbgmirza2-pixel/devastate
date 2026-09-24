@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useState } from "react";
-import { defaultHomeContent } from "@/lib/homeDefaults";
+
 
 export default function FAQ({ content }) {
   const [openIndex, setOpenIndex] = useState(null);

@@ -14,8 +14,6 @@ import PropsandCorn from './components/PropsandCorn';
 import FaqSection from './components/FaqSection';
 import FinalWords from './components/FinalWords';
 import ScreenshotsPage from './screenshots/page';
-import JsonLd, { generateApkSchema } from './components/JsonLd';
-import { getApk, getContent } from '@/lib/database';
 import { defaultHomeContent } from '@/lib/homeDefaults';
 
 export const metadata = {
@@ -32,22 +30,13 @@ export const metadata = {
   },
 };
 
-export default async function HomePage() {
-  const apk = await getApk() || {};
-  const siteSettings = await getContent('settings', {}) || {};
-  const savedHomeContent = await getContent('page:home', null);
-  
-  // Merge saved home content with defaultHomeContent
-  const home = savedHomeContent ? { ...defaultHomeContent, ...savedHomeContent } : defaultHomeContent;
-
-  const apkSchema = generateApkSchema(
-    apk,
-    siteSettings.siteUrl || 'https://thedevastate.com'
-  );
+export default function HomePage() {
+  // Static home content using defaults (no database / admin dependency)
+  const home = defaultHomeContent;
+  const apk = {}; // Static fallback agar APK data ki zaroorat ho
 
   return (
     <main className="w-full flex flex-col" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
-      <JsonLd data={apkSchema} />
       <HeroSection content={home.hero} apkData={apk} />
       <GameSpecs content={home.specs} apkData={apk} />
       <ScreenshotsPage content={home.screenshots} />

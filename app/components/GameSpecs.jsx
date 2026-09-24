@@ -1,9 +1,8 @@
-import { getApk } from '@/lib/database';
 import { defaultHomeContent } from '@/lib/homeDefaults';
 import TableOfContentsList from './TableOfContentsList';
 
 export default async function AppInfoWithTableOfContents({ content, apkData }) {
-  const apk = apkData || await getApk() || {
+  const apk = apkData || {
     appName: "Devastate",
     version: "1.0",
     category: "Simulation",

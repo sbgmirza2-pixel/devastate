@@ -31,7 +31,7 @@ export default function Navbar() {
           </Link>
 
           <Link href="/blog" className="hover:opacity-70 transition">
-            Blog
+            Blogs
           </Link>
 
           <Link href="/faqs" className="hover:opacity-70 transition">
@@ -109,7 +109,7 @@ export default function Navbar() {
               onClick={() => setIsOpen(false)}
               className="px-4 py-2.5 rounded-lg text-sm font-bold tracking-wider uppercase text-black hover:bg-black/5 transition"
             >
-              Blog
+              Blogs
             </Link>
 
             <Link

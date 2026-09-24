@@ -1,4 +1,4 @@
-import { getContent } from '@/lib/database';
+
 
 export default async function manifest() {
   let siteName = 'Devastate APK';

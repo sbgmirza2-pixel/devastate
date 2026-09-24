@@ -1,10 +1,9 @@
 import Link from 'next/link';
-import { getApk } from '@/lib/database';
 import HeroShareButton from './HeroShareButton';
 import { defaultHomeContent } from '@/lib/homeDefaults';
 
 export default async function HeroSection({ content, apkData }) {
-  const apk = apkData || await getApk() || {};
+  const apk = apkData || {};
   const hero = content || defaultHomeContent.hero;
 
   const appName = apk.appName || hero.heading?.replace(/\s+APK$/i, '') || 'Devastate';
@@ -39,7 +38,7 @@ export default async function HeroSection({ content, apkData }) {
 
           {/* White Theme Bordered Box - 50/50 split (Half Rating & Half Share Button with Divider) */}
          <div className="w-fit max-w-full mx-auto flex items-stretch bg-white border border-black/20 rounded-2xl shadow-sm overflow-hidden">
-  
+ 
   {/* Rating */}
   <div
     className="flex items-center justify-center gap-1 sm:gap-1.5 px-2 sm:px-3 py-3 select-none text-center bg-white whitespace-nowrap"

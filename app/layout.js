@@ -3,7 +3,6 @@ import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import GoogleAnalytics from "./components/GoogleAnalytics";
 import JsonLd, { generateWebSiteSchema } from "./components/JsonLd";
-import { getContent } from "@/lib/database";
 import "./globals.css";
 
 const headingFont = Plus_Jakarta_Sans({
@@ -20,20 +19,18 @@ const roboto = Roboto({
   display: 'swap',
 });
 
-export async function generateMetadata() {
-  let siteSettings = {
-    siteName: 'Devastate APK',
-    siteDescription: 'Download Devastate APK for Android - Anime Simulation Game with 2D visuals and interactive story dialogue.',
-    siteUrl: 'https://thedevastate.com',
-    gscVerificationToken: '',
-    allowIndexing: true,
-  };
+// Static Site Settings (Database hatane ke baad yeh default values use hongi)
+const siteSettings = {
+  siteName: 'Devastate APK',
+  siteDescription: 'Download Devastate APK for Android - Anime Simulation Game with 2D visuals and interactive story dialogue.',
+  siteUrl: 'https://thedevastate.com',
+  gscVerificationToken: '',
+  allowIndexing: true,
+  language: 'en',
+  gaMeasurementId: process.env.NEXT_PUBLIC_GA_ID || '',
+};
 
-  try {
-    const loaded = await getContent('settings', {});
-    if (loaded) siteSettings = { ...siteSettings, ...loaded };
-  } catch {}
-
+export function generateMetadata() {
   const siteUrl = siteSettings.siteUrl.replace(/\/+$/, '');
 
   return {
@@ -124,14 +121,12 @@ export async function generateMetadata() {
   };
 }
 
-export default async function RootLayout({ children }) {
-  const siteSettings = await getContent('settings', {}) || {};
-
-  const gaId = siteSettings.gaMeasurementId || process.env.NEXT_PUBLIC_GA_ID;
+export default function RootLayout({ children }) {
+  const gaId = siteSettings.gaMeasurementId;
   const webSiteSchema = generateWebSiteSchema(siteSettings);
 
   return (
-    <html lang={siteSettings.language || "en"} className={`${headingFont.variable} ${roboto.variable}`}>
+    <html lang={siteSettings.language} className={`${headingFont.variable} ${roboto.variable}`}>
       <head>
         <JsonLd data={webSiteSchema} />
       </head>

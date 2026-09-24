@@ -1,5 +1,4 @@
 import BlogListClient from './BlogListClient';
-import { listBlogPosts } from '@/lib/database';
 import JsonLd, { generateBreadcrumbSchema } from '@/app/components/JsonLd';
 
 export const metadata = {
@@ -16,12 +15,40 @@ export const metadata = {
   },
 };
 
+// Static Blog Posts (Database hatane ke baad yeh static data use hoga)
+const staticBlogPosts = [
+  {
+    _id: '1',
+    title: 'How to Install Devastate APK on Android Devices Safely',
+    slug: 'how-to-install-devastate-apk-safely',
+    excerpt: 'Step-by-step guide on enabling unknown sources, verifying package integrity, and completing secure installation.',
+    date: 'September 2026',
+    category: 'Guides',
+  },
+  {
+    _id: '2',
+    title: 'Playing Devastate on PC Using Android Emulators',
+    slug: 'playing-devastate-on-pc-emulators',
+    excerpt: 'Learn how to run Devastate smoothly on Windows and Mac using popular emulators like BlueStacks or LDPlayer.',
+    date: 'September 2026',
+    category: 'Tutorials',
+  },
+  {
+    _id: '3',
+    title: 'Devastate APK v1.0 Update Changelog & What’s New',
+    slug: 'devastate-apk-v1-update-changelog',
+    excerpt: 'Explore the latest features, bug fixes, performance optimizations, and interface improvements in the newest release.',
+    date: 'September 2026',
+    category: 'Updates',
+  },
+];
+
 export default async function BlogPage() {
-  const posts = await listBlogPosts();
+  const posts = staticBlogPosts;
   const breadcrumbSchema = generateBreadcrumbSchema([
     { name: 'Home', url: '/' },
     { name: 'Blog', url: '/blog' },
-  ]);
+  ], 'https://thedevastate.com');
 
   return (
     <div className="w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12" style={{ fontFamily: 'var(--font-roboto), sans-serif' }}>
@@ -44,7 +71,7 @@ export default async function BlogPage() {
       </div>
 
       {/* Interactive Blog List Component */}
-      <BlogListClient posts={posts.map((post) => ({ ...post, _id: post._id?.toString() }))} />
+      <BlogListClient posts={posts} />
 
     </div>
   );

@@ -1,28 +1,5 @@
-import { getContent } from '@/lib/database';
-
-export default async function robots() {
-  let siteUrl = 'https://thedevastate.com';
-  let allowIndexing = true;
-
-  try {
-    const settings = await getContent('settings', {});
-    if (settings?.siteUrl) {
-      siteUrl = settings.siteUrl.replace(/\/+$/, '');
-    }
-    if (settings && typeof settings.allowIndexing === 'boolean') {
-      allowIndexing = settings.allowIndexing;
-    }
-  } catch {}
-
-  if (!allowIndexing) {
-    return {
-      rules: {
-        userAgent: '*',
-        disallow: '/',
-      },
-      sitemap: `${siteUrl}/sitemap.xml`,
-    };
-  }
+export default function robots() {
+  const siteUrl = 'https://thedevastate.com';
 
   return {
     rules: [
@@ -30,8 +7,6 @@ export default async function robots() {
         userAgent: '*',
         allow: '/',
         disallow: [
-          '/admin',
-          '/admin/',
           '/api',
           '/api/',
           '/_next/',
@@ -41,12 +16,12 @@ export default async function robots() {
       {
         userAgent: 'Googlebot',
         allow: '/',
-        disallow: ['/admin/', '/api/'],
+        disallow: ['/api/'],
       },
       {
         userAgent: 'Bingbot',
         allow: '/',
-        disallow: ['/admin/', '/api/'],
+        disallow: ['/api/'],
       },
     ],
     sitemap: `${siteUrl}/sitemap.xml`,
