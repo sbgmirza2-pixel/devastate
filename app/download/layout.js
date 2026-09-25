@@ -16,7 +16,7 @@ const defaultApk = {
   }
 };
 
-const siteUrl = 'https://thedevastate.com';
+const siteUrl = 'http://devastateapk.com/';
 
 export function generateMetadata() {
   const apk = defaultApk;

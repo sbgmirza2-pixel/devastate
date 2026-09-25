@@ -1,5 +1,5 @@
 export default async function sitemap() {
-  const siteUrl = 'https://thedevastate.com';
+  const siteUrl = 'http://devastateapk.com/';
   const now = new Date().toISOString();
 
   // Static routes (No database dependency)

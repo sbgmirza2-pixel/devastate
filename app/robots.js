@@ -1,5 +1,5 @@
 export default function robots() {
-  const siteUrl = 'https://thedevastate.com';
+  const siteUrl = 'http://devastateapk.com/';
 
   return {
     rules: [
