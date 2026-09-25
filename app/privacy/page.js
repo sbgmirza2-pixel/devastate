@@ -1,6 +1,4 @@
 import Link from 'next/link';
-import { getContent } from '@/lib/database';
-import MarkdownContent from '@/app/components/MarkdownContent';
 
 export const metadata = {
   title: "Privacy Policy - Devastate APK",
@@ -10,9 +8,7 @@ export const metadata = {
   },
 };
 
-export default async function PrivacyPolicyPage() {
-  const override = await getContent('page:privacy', '');
-  if (override) return <main className="max-w-4xl mx-auto px-6 py-12"><MarkdownContent content={override} /></main>;
+export default function PrivacyPolicyPage() {
   return (
     <div
       className="max-w-4xl mx-auto px-6 sm:px-10 py-16"
