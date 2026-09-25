@@ -23,7 +23,7 @@ export default function ScreenshotsPage({ content }) {
           </h2>
         </div>
         
-        {/* Description */}
+        {/* Description*/}
         <div 
           className="text-neutral-700 text-base sm:text-lg leading-relaxed mb-8 max-w-4xl" 
           style={{ fontFamily: 'var(--font-roboto), sans-serif' }}
