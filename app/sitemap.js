@@ -1,25 +1,30 @@
 export default async function sitemap() {
-  const siteUrl = 'http://devastateapk.net/';
+  const baseUrl = 'https://devastateapk.net';
   const now = new Date().toISOString();
 
-  // Static routes (No database dependency)
+  // Static Pages
   const staticRoutes = [
-    { url: `${siteUrl}/`, lastModified: now, changeFrequency: 'daily', priority: 1.0 },
-    { url: `${siteUrl}/download`, lastModified: now, changeFrequency: 'daily', priority: 0.95 },
-    { url: `${siteUrl}/blog`, lastModified: now, changeFrequency: 'daily', priority: 0.9 },
-    { url: `${siteUrl}/faqs`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${siteUrl}/install-guide`, lastModified: now, changeFrequency: 'weekly', priority: 0.85 },
-    { url: `${siteUrl}/guide`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${siteUrl}/whats-new`, lastModified: now, changeFrequency: 'weekly', priority: 0.8 },
-    { url: `${siteUrl}/screenshots`, lastModified: now, changeFrequency: 'weekly', priority: 0.75 },
-    { url: `${siteUrl}/system-readout`, lastModified: now, changeFrequency: 'weekly', priority: 0.7 },
-    { url: `${siteUrl}/about`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${siteUrl}/contact`, lastModified: now, changeFrequency: 'monthly', priority: 0.6 },
-    { url: `${siteUrl}/privacy`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${siteUrl}/terms`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${siteUrl}/disclaimer`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
-    { url: `${siteUrl}/dmca`, lastModified: now, changeFrequency: 'monthly', priority: 0.5 },
-  ];
+    '',
+    '/download',
+    '/blog',
+    '/faqs',
+    '/install-guide',
+    '/guide',
+    '/whats-new',
+    '/screenshots',
+    '/system-readout',
+    '/about',
+    '/contact',
+    '/privacy',
+    '/terms',
+    '/disclaimer',
+    '/dmca',
+  ].map((route) => ({
+    url: `${baseUrl}${route}`,
+    lastModified: now,
+    changeFrequency: route === '' || route === '/download' || route === '/blog' ? 'daily' : route.includes('guide') || route === '/faqs' || route === '/whats-new' ? 'weekly' : 'monthly',
+    priority: route === '' ? 1.0 : route === '/download' ? 0.95 : route === '/blog' ? 0.9 : route.includes('guide') || route === '/faqs' ? 0.85 : 0.6,
+  }));
 
   return staticRoutes;
 }
