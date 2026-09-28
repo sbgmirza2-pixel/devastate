@@ -19,7 +19,7 @@ const roboto = Roboto({
   display: 'swap',
 });
 
-// Static Site Settings (Database hatane ke baad yeh default values use hongi)
+// Static Site Settings (Client ki di hui Google Analytics ID yahan direct update kar di hai)
 const siteSettings = {
   siteName: 'Devastate APK',
   siteDescription: 'Download Devastate APK for Android - Anime Simulation Game with 2D visuals and interactive story dialogue.',
@@ -27,7 +27,7 @@ const siteSettings = {
   gscVerificationToken: '',
   allowIndexing: true,
   language: 'en',
-  gaMeasurementId: process.env.NEXT_PUBLIC_GA_ID || '',
+  gaMeasurementId: 'G-B7XJTZVP43', // Direct client Measurement ID added here
 };
 
 export function generateMetadata() {
