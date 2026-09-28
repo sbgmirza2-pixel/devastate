@@ -16,7 +16,7 @@ export default function JsonLd({ data }) {
 /**
  * Generates MobileApplication / SoftwareApplication schema for APK pages
  */
-export function generateApkSchema(apk = {}, siteUrl = 'https://thedevastate.com', reviewStats = {}) {
+export function generateApkSchema(apk = {}, siteUrl = 'https://devastateapk.net', reviewStats = {}) {
   const downloadUrl = apk.downloadUrl?.startsWith('http')
     ? apk.downloadUrl
     : `${siteUrl}${apk.downloadUrl || '/download'}`;
@@ -71,7 +71,7 @@ export function generateApkSchema(apk = {}, siteUrl = 'https://thedevastate.com'
  * Generates Organization & WebSite schema with search capability
  */
 export function generateWebSiteSchema(siteSettings = {}) {
-  const siteUrl = siteSettings.siteUrl || 'https://thedevastate.com';
+  const siteUrl = siteSettings.siteUrl || 'https://devastateapk.net';
   const siteName = siteSettings.siteName || 'Devastate APK';
 
   return {
@@ -89,7 +89,7 @@ export function generateWebSiteSchema(siteSettings = {}) {
         },
         contactPoint: {
           '@type': 'ContactPoint',
-          email: siteSettings.contactEmail || 'contact@thedevastate.com',
+          email: siteSettings.contactEmail || 'contact@devastateapk.net',
           contactType: 'customer support',
         },
       },
@@ -116,7 +116,7 @@ export function generateWebSiteSchema(siteSettings = {}) {
 /**
  * Generates Article / BlogPosting schema for blog posts
  */
-export function generateArticleSchema(post, siteUrl = 'https://thedevastate.com') {
+export function generateArticleSchema(post, siteUrl = 'https://devastateapk.net') {
   if (!post) return null;
 
   const postUrl = `${siteUrl}/blog/${post.slug}`;
@@ -178,7 +178,7 @@ export function generateFaqSchema(faqs = []) {
 /**
  * Generates BreadcrumbList schema
  */
-export function generateBreadcrumbSchema(items = [], siteUrl = 'https://thedevastate.com') {
+export function generateBreadcrumbSchema(items = [], siteUrl = 'https://devastateapk.net') {
   return {
     '@context': 'https://schema.org',
     '@type': 'BreadcrumbList',
