@@ -1,6 +1,6 @@
 export default async function sitemap() {
   const baseUrl = 'https://devastateapk.net';
-  const now = new Date().toISOString();
+  const now = new Date(); // Fixed: using Date object instead of toISOString()
 
   // Static Pages
   const staticRoutes = [
