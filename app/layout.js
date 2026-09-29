@@ -19,7 +19,7 @@ const roboto = Roboto({
   display: 'swap',
 });
 
-// --- BRAND CONSISTENCY: Exact brand name across layout, metadata & schema ---
+// Static Site Settings (Client ki di hui Google Analytics ID yahan direct update kar di hai)
 const siteSettings = {
   siteName: 'Devastate APK',
   siteDescription: 'Download Devastate APK for Android - Anime Simulation Game with 2D visuals and interactive story dialogue.',
@@ -27,7 +27,7 @@ const siteSettings = {
   gscVerificationToken: '',
   allowIndexing: true,
   language: 'en',
-  gaMeasurementId: 'G-B7XJTZVP43',
+  gaMeasurementId: 'G-B7XJTZVP43', // Direct client Measurement ID added here
 };
 
 export function generateMetadata() {
@@ -42,8 +42,8 @@ export function generateMetadata() {
     description: siteSettings.siteDescription,
     applicationName: siteSettings.siteName,
     
-    authors: [{ name: 'Saleha', url: 'http://devastateapk.net/' }],
-    creator: 'Saleha',
+    authors: [{ name: 'Devastate DEV' }],
+    creator: 'Devastate DEV',
     publisher: siteSettings.siteName,
     formatDetection: {
       email: false,
@@ -69,7 +69,7 @@ export function generateMetadata() {
       type: 'website',
       locale: 'en_US',
       url: siteUrl,
-      siteName: siteSettings.siteName, // Exact brand consistency
+      siteName: siteSettings.siteName,
       title: `${siteSettings.siteName} Download for Android - Latest Version`,
       description: siteSettings.siteDescription,
       images: [
@@ -105,6 +105,11 @@ export function generateMetadata() {
           index: false,
           follow: false,
         },
+    verification: siteSettings.gscVerificationToken
+      ? {
+          google: siteSettings.gscVerificationToken,
+        }
+      : undefined,
   };
 }
 
@@ -112,29 +117,12 @@ export default function RootLayout({ children }) {
   const gaId = siteSettings.gaMeasurementId;
   const webSiteSchema = generateWebSiteSchema(siteSettings);
 
-  const enhancedSchema = {
-    ...webSiteSchema,
-    "name": "Devastate APK",
-    "sameAs": [
-      "https://github.com/",
-      "https://twitter.com/DevastateAPK",
-      "https://linkedin.com/"
-    ]
-  };
-
   return (
     <html lang={siteSettings.language} className={`${headingFont.variable} ${roboto.variable}`}>
       <head>
-        <JsonLd data={enhancedSchema} />
+        <JsonLd data={webSiteSchema} />
       </head>
       <body className="bg-[#D1D5DB] text-[#1F2937] min-h-screen flex flex-col justify-between selection:bg-[#544558] selection:text-white antialiased">
-        <div className="sr-only" aria-hidden="true">
-          <cite>Devastate APK Official Android Documentation</cite>
-          <blockquote>
-            <q>Official distribution channels provide verified software packages for secure mobile integration.</q>
-          </blockquote>
-        </div>
-
         <GoogleAnalytics gaId={gaId} />
         <Navbar />
         <main className="flex-grow">
