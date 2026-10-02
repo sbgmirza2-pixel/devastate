@@ -21,13 +21,13 @@ const SITE_URL = 'https://devastateapk.net';
 export const metadata = {
   metadataBase: new URL(SITE_URL),
   title: "Devastate APK Download for Android - Anime Simulation Game",
-  description: "Download Devastate APK for Android and enjoy an anime-style simulation game with 2D visuals, character stories, dialogue choices, daily tasks, items, coins, outfits, and more.",
+  description: "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
   alternates: {
     canonical: '/',
   },
   openGraph: {
     title: "Devastate APK Download for Android - Anime Simulation Game",
-    description: "Download Devastate APK for Android and enjoy an anime-style simulation game with 2D visuals, character stories, dialogue choices, daily tasks, items, coins, outfits, and more.",
+    description: "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
     url: SITE_URL,
     siteName: 'Devastate APK',
     locale: 'en_US',
@@ -37,7 +37,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: "Devastate APK Download for Android - Anime Simulation Game",
-    description: "Download Devastate APK for Android and enjoy an anime-style simulation game.",
+    description: "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
     images: ['/pic1.webp'],
   },
 };
@@ -53,7 +53,7 @@ export default function HomePage() {
     "name": "Devastate APK",
     "operatingSystem": "ANDROID",
     "applicationCategory": "GameApplication",
-    "description": "Download Devastate APK for Android and enjoy an anime-style simulation game with 2D visuals, character stories, dialogue choices, daily tasks, items, coins, outfits, and more.",
+    "description": "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
     "datePublished": "2026-01-01T08:00:00+00:00",
     "dateModified": "2026-09-29T12:00:00+00:00",
     "author": {

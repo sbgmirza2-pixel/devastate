@@ -1,4 +1,5 @@
 import Link from 'next/link';
+import Image from 'next/image';
 
 export default function BlogListClient({ posts }) {
   return (
@@ -12,11 +13,13 @@ export default function BlogListClient({ posts }) {
           <Link href={`/blog/${post.slug}`} className="absolute inset-0 z-10" aria-label={post.title} />
 
           <div>
-            <div className="aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-black/5 border border-black/5">
-              <img
+            <div className="aspect-[16/10] rounded-xl overflow-hidden mb-4 bg-black/5 border border-black/5 relative">
+              <Image
                 src={post.coverImage || '/picblog.webp'}
-                alt={post.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                alt={post.title || 'Blog Post Cover Image'}
+                fill
+                sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                className="object-cover group-hover:scale-105 transition-transform duration-300"
               />
             </div>
             <span className="text-[10px] font-bold uppercase tracking-wider bg-black/5 px-2.5 py-1 rounded-full text-black/70 relative z-20">

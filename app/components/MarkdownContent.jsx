@@ -81,24 +81,29 @@ export default function MarkdownContent({ content }) {
               {...props}
             />
           ),
-          img: ({ node, alt, src, title, ...props }) => (
-            <figure className="my-8 flex flex-col items-center">
-              <div className="overflow-hidden rounded-2xl border border-black/10 shadow-md bg-white p-1">
-                <img
-                  src={src}
-                  alt={alt || 'Devastate blog image'}
-                  className="max-h-[520px] w-auto max-w-full object-contain rounded-xl"
-                  loading="lazy"
-                  {...props}
-                />
-              </div>
-              {(alt || title) && (
-                <figcaption className="text-xs sm:text-sm text-gray-500 mt-2.5 text-center font-medium italic">
-                  {title || alt}
-                </figcaption>
-              )}
-            </figure>
-          ),
+          img: ({ node, alt, src, title, ...props }) => {
+            const filename = src ? src.split('/').pop().split('?')[0].replace(/[-_]/g, ' ') : 'Devastate blog post illustration';
+            const finalAlt = alt && alt.trim() !== '' ? alt : `Devastate guide showing ${filename}`;
+
+            return (
+              <figure className="my-8 flex flex-col items-center">
+                <div className="overflow-hidden rounded-2xl border border-black/10 shadow-md bg-white p-1">
+                  <img
+                    src={src}
+                    alt={finalAlt}
+                    className="max-h-[520px] w-auto max-w-full object-contain rounded-xl"
+                    loading="lazy"
+                    {...props}
+                  />
+                </div>
+                {(finalAlt || title) && (
+                  <figcaption className="text-xs sm:text-sm text-gray-500 mt-2.5 text-center font-medium italic">
+                    {title || finalAlt}
+                  </figcaption>
+                )}
+              </figure>
+            );
+          },
           a: ({ node, href, children, ...props }) => {
             const normalizedHref = normalizeHref(href);
             const isInternal = normalizedHref && (normalizedHref.startsWith('/') || normalizedHref.startsWith('#'));
@@ -144,6 +149,7 @@ export default function MarkdownContent({ content }) {
               return (
                 <code
                   className="bg-black/5 text-gray-900 px-2 py-0.5 rounded-md font-mono text-xs sm:text-sm border border-black/10 font-semibold"
+                  style={{ wordBreak: 'break-word' }}
                   {...props}
                 >
                   {children}
