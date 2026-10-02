@@ -19,11 +19,11 @@ const roboto = Roboto({
   display: 'swap',
 });
 
-// Static Site Settings (Updated http to https)
+// Static Site Settings
 const siteSettings = {
   siteName: 'Devastate APK',
   siteDescription: 'Download Devastate APK for Android - Anime Simulation Game with 2D visuals and interactive story dialogue.',
-  siteUrl: 'https://devastateapk.net/', // 👈 Fixed to https
+  siteUrl: 'https://devastateapk.net/',
   gscVerificationToken: '',
   allowIndexing: true,
   language: 'en',
@@ -31,10 +31,10 @@ const siteSettings = {
 };
 
 export function generateMetadata() {
-  const siteUrl = siteSettings.siteUrl.replace(/\/+$/, '');
+  const metadataBaseUrl = 'https://devastateapk.net';
 
   return {
-    metadataBase: new URL(siteUrl),
+    metadataBase: new URL(metadataBaseUrl),
     title: {
       default: `${siteSettings.siteName} Download for Android - Latest Version`,
       template: `%s | ${siteSettings.siteName}`,
@@ -51,10 +51,10 @@ export function generateMetadata() {
       telephone: false,
     },
     alternates: {
-      canonical: '/',
+      canonical: 'https://devastateapk.net/', // 👈 Yahan seedha exact link trailing slash ke sath likh diya hai
       languages: {
-        'en-US': '/',
-        'x-default': '/',
+        'en-US': 'https://devastateapk.net/',
+        'x-default': 'https://devastateapk.net/',
       },
     },
     icons: {
@@ -68,13 +68,13 @@ export function generateMetadata() {
     openGraph: {
       type: 'website',
       locale: 'en_US',
-      url: siteUrl,
+      url: 'https://devastateapk.net/',
       siteName: siteSettings.siteName,
       title: `${siteSettings.siteName} Download for Android - Latest Version`,
       description: siteSettings.siteDescription,
       images: [
         {
-          url: '/pic1.webp', // 👈 Better to use game banner for social sharing preview
+          url: '/pic1.webp',
           width: 1200,
           height: 630,
           alt: `${siteSettings.siteName} Official Preview`,
