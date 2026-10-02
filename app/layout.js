@@ -51,19 +51,16 @@ export function generateMetadata() {
       telephone: false,
     },
     alternates: {
-      canonical: 'https://devastateapk.net/', // 👈 Yahan seedha exact link trailing slash ke sath likh diya hai
+      canonical: 'https://devastateapk.net/',
       languages: {
         'en-US': 'https://devastateapk.net/',
         'x-default': 'https://devastateapk.net/',
       },
     },
+    // 👈 UPDATE: Optimized favicon paths
     icons: {
-      icon: [
-        { url: '/Devastate-fav-icon.webp' },
-        { url: '/Devastate-fav-icon.webp', sizes: '32x32', type: 'image/webp' },
-      ],
-      apple: [{ url: '/Devastate-fav-icon.webp' }],
-      shortcut: ['/Devastate-fav-icon.webp'],
+      icon: '/favicon.ico',
+      apple: '/favicon.ico',
     },
     openGraph: {
       type: 'website',

@@ -8,12 +8,12 @@ export default function GoogleAnalytics({ gaId }) {
   return (
     <>
       <Script
-        strategy="afterInteractive"
+        strategy="lazyOnload" // 👈 Fixed: Main thread block nahi hoga
         src={`https://www.googletagmanager.com/gtag/js?id=${gaId}`}
       />
       <Script
         id="google-analytics-init"
-        strategy="afterInteractive"
+        strategy="lazyOnload" // 👈 Fixed
         dangerouslySetInnerHTML={{
           __html: `
             window.dataLayer = window.dataLayer || [];
