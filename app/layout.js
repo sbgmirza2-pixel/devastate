@@ -19,15 +19,15 @@ const roboto = Roboto({
   display: 'swap',
 });
 
-// Static Site Settings (Client ki di hui Google Analytics ID yahan direct update kar di hai)
+// Static Site Settings (Updated http to https)
 const siteSettings = {
   siteName: 'Devastate APK',
   siteDescription: 'Download Devastate APK for Android - Anime Simulation Game with 2D visuals and interactive story dialogue.',
-  siteUrl: 'http://devastateapk.net/',
+  siteUrl: 'https://devastateapk.net/', // 👈 Fixed to https
   gscVerificationToken: '',
   allowIndexing: true,
   language: 'en',
-  gaMeasurementId: 'G-B7XJTZVP43', // Direct client Measurement ID added here
+  gaMeasurementId: 'G-B7XJTZVP43',
 };
 
 export function generateMetadata() {
@@ -42,8 +42,8 @@ export function generateMetadata() {
     description: siteSettings.siteDescription,
     applicationName: siteSettings.siteName,
     
-    authors: [{ name: 'Devastate DEV' }],
-    creator: 'Devastate DEV',
+    authors: [{ name: 'Devastate Team' }],
+    creator: 'Devastate Team',
     publisher: siteSettings.siteName,
     formatDetection: {
       email: false,
@@ -74,10 +74,10 @@ export function generateMetadata() {
       description: siteSettings.siteDescription,
       images: [
         {
-          url: '/Devastate-fav-icon.webp',
-          width: 512,
-          height: 512,
-          alt: `${siteSettings.siteName} Official Logo`,
+          url: '/pic1.webp', // 👈 Better to use game banner for social sharing preview
+          width: 1200,
+          height: 630,
+          alt: `${siteSettings.siteName} Official Preview`,
         },
       ],
     },
@@ -85,7 +85,7 @@ export function generateMetadata() {
       card: 'summary_large_image',
       title: `${siteSettings.siteName} Download for Android`,
       description: siteSettings.siteDescription,
-      images: ['/Devastate-fav-icon.webp'],
+      images: ['/pic1.webp'],
       creator: '@DevastateAPK',
     },
     robots: siteSettings.allowIndexing

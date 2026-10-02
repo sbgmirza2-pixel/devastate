@@ -1,5 +1,5 @@
 export default function robots() {
-  const siteUrl = 'http://devastateapk.net/';
+  const siteUrl = 'https://devastateapk.net'; // 👈 Updated to https and removed trailing slash for clean concatenation
 
   return {
     rules: [

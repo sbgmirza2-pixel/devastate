@@ -16,7 +16,10 @@ import FinalWords from './components/FinalWords';
 import ScreenshotsPage from './screenshots/page';
 import { defaultHomeContent } from '@/lib/homeDefaults';
 
+const SITE_URL = 'https://devastateapk.net';
+
 export const metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Devastate APK Download for Android - Anime Simulation Game",
   description: "Download Devastate APK for Android and enjoy an anime-style simulation game with 2D visuals, character stories, dialogue choices, daily tasks, items, coins, outfits, and more.",
   alternates: {
@@ -25,17 +28,25 @@ export const metadata = {
   openGraph: {
     title: "Devastate APK Download for Android - Anime Simulation Game",
     description: "Download Devastate APK for Android and enjoy an anime-style simulation game with 2D visuals, character stories, dialogue choices, daily tasks, items, coins, outfits, and more.",
-    url: '/',
+    url: SITE_URL,
+    siteName: 'Devastate APK',
+    locale: 'en_US',
+    type: 'website',
+    images: ['/pic1.webp'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: "Devastate APK Download for Android - Anime Simulation Game",
+    description: "Download Devastate APK for Android and enjoy an anime-style simulation game.",
     images: ['/pic1.webp'],
   },
 };
 
 export default function HomePage() {
-  // Static home content using defaults (no database / admin dependency)
   const home = defaultHomeContent;
-  const apk = {}; // Static fallback agar APK data ki zaroorat ho
+  const apk = {}; 
 
-  // --- COMPREHENSIVE CONTENT SCHEMA (Fixes Content Schema, Author & Date Markup errors) ---
+  // --- COMPREHENSIVE CONTENT SCHEMA (Updated author name to Devastate Team) ---
   const softwareAppSchema = {
     "@context": "https://schema.org",
     "@type": "SoftwareApplication",
@@ -46,26 +57,26 @@ export default function HomePage() {
     "datePublished": "2026-01-01T08:00:00+00:00",
     "dateModified": "2026-09-29T12:00:00+00:00",
     "author": {
-      "@type": "Person",
-      "name": "Saleha",
-      "url": "http://devastateapk.net/"
+      "@type": "Organization", // Changed from Person to Organization / Team
+      "name": "Devastate Team",
+      "url": `${SITE_URL}/`
     },
     "publisher": {
       "@type": "Organization",
       "name": "Devastate DEV",
       "logo": {
         "@type": "ImageObject",
-        "url": "http://devastateapk.net/Devastate-fav-icon.webp"
+        "url": `${SITE_URL}/Devastate-fav-icon.webp`
       }
     },
     "offers": {
       "@type": "Offer",
+      "@id": `${SITE_URL}/#offer`,
       "price": "0",
       "priceCurrency": "USD"
     }
   };
 
-  // --- FAQ SCHEMA FOR AI & SEARCH ENGINES ---
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -91,7 +102,6 @@ export default function HomePage() {
 
   return (
     <>
-      {/* Schema Injection to fix SEO Content & Author Markup errors */}
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
