@@ -37,7 +37,7 @@ export function generateMetadata() {
     metadataBase: new URL(metadataBaseUrl),
     title: {
       default: `${siteSettings.siteName} Download for Android - Latest Version`,
-      template: `%s | ${siteSettings.siteName}`,
+     
     },
     description: siteSettings.siteDescription,
     applicationName: siteSettings.siteName,
