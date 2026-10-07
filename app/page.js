@@ -49,13 +49,12 @@ export default function HomePage() {
   // --- COMPREHENSIVE CONTENT SCHEMA (Updated author name to Devastate Team) ---
   const softwareAppSchema = {
     "@context": "https://schema.org",
-    "@type": "SoftwareApplication",
+    "@type": "WebSite",
     "name": "Devastate APK",
-    "operatingSystem": "ANDROID",
-    "applicationCategory": "GameApplication",
+  
+    
     "description": "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
-    "datePublished": "2026-01-01T08:00:00+00:00",
-    "dateModified": "2026-09-29T12:00:00+00:00",
+   
     "author": {
       "@type": "Organization", // Changed from Person to Organization / Team
       "name": "Devastate Team",
@@ -69,12 +68,6 @@ export default function HomePage() {
         "url": `${SITE_URL}/Devastate-fav-icon.webp`
       }
     },
-    "offers": {
-      "@type": "Offer",
-      "@id": `${SITE_URL}/#offer`,
-      "price": "0",
-      "priceCurrency": "USD"
-    }
   };
 
   const faqSchema = {
