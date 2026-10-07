@@ -50,7 +50,7 @@ export function generateMetadata() {
       address: false,
       telephone: false,
     },
-    alternates: {
+   alternates: {
       canonical: 'https://devastateapk.net/',
       languages: {
         'en-US': 'https://devastateapk.net/',
