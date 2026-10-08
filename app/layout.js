@@ -22,7 +22,7 @@ const roboto = Roboto({
 // Static Site Settings
 const siteSettings = {
   siteName: 'Devastate APK',
-  siteDescription: 'Download Devastate APK for Android - Anime Simulation Game with 2D visuals and interactive story dialogue.',
+  siteDescription: 'Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.',
   siteUrl: 'https://devastateapk.net/',
   gscVerificationToken: '',
   allowIndexing: true,
