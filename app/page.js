@@ -16,7 +16,7 @@ import FinalWords from './components/FinalWords';
 import ScreenshotsPage from './screenshots/page';
 import { defaultHomeContent } from '@/lib/homeDefaults';
 
-const SITE_URL = 'https://devastateapk.net';
+const SITE_URL = 'https://devastateapk.net/';
 
 export const metadata = {
   metadataBase: new URL(SITE_URL),
