@@ -23,7 +23,7 @@ export const metadata = {
   title: "Devastate APK Download for Android - Anime Simulation Game",
   description: "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
   alternates: {
-    canonical: '/',
+    canonical: 'https://devastateapk.net/',
   },
   openGraph: {
     title: "Devastate APK Download for Android - Anime Simulation Game",
