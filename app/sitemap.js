@@ -1,5 +1,5 @@
 export default function sitemap() {
-  const baseUrl = 'https://devastateapk.net';
+  const baseUrl = 'https://devastateapk.net/';
 
   const routes = [
     '',
