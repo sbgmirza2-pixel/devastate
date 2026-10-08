@@ -1,9 +1,7 @@
-export default async function sitemap() {
+export default function sitemap() {
   const baseUrl = 'https://devastateapk.net';
-  const now = new Date(); // Fixed: using Date object instead of toISOString()
 
-  // Static Pages
-  const staticRoutes = [
+  const routes = [
     '',
     '/download',
     '/blog',
@@ -19,12 +17,9 @@ export default async function sitemap() {
     '/terms',
     '/disclaimer',
     '/dmca',
-  ].map((route) => ({
-    url: `${baseUrl}${route}`,
-    lastModified: now,
-    changeFrequency: route === '' || route === '/download' || route === '/blog' ? 'daily' : route.includes('guide') || route === '/faqs' || route === '/whats-new' ? 'weekly' : 'monthly',
-    priority: route === '' ? 1.0 : route === '/download' ? 0.95 : route === '/blog' ? 0.9 : route.includes('guide') || route === '/faqs' ? 0.85 : 0.6,
-  }));
+  ];
 
-  return staticRoutes;
+  return routes.map((route) => ({
+    url: `${baseUrl}${route}`,
+  }));
 }
