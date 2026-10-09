@@ -16,31 +16,8 @@ import FinalWords from './components/FinalWords';
 import ScreenshotsPage from './screenshots/page';
 import { defaultHomeContent } from '@/lib/homeDefaults';
 
+// 👈 Yeh line yahan add kar dein taaki schema me URL define rahe
 const SITE_URL = 'https://devastateapk.net/';
-
-export const metadata = {
-  metadataBase: new URL(SITE_URL),
-  title: "Devastate APK Download for Android - Anime Simulation Game",
-  description: "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
-  alternates: {
-    canonical: 'https://devastateapk.net/',
-  },
-  openGraph: {
-    title: "Devastate APK Download for Android - Anime Simulation Game",
-    description: "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
-    url: SITE_URL,
-    siteName: 'Devastate APK',
-    locale: 'en_US',
-    type: 'website',
-    images: ['/pic1.webp'],
-  },
-  twitter: {
-    card: 'summary_large_image',
-    title: "Devastate APK Download for Android - Anime Simulation Game",
-    description: "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
-    images: ['/pic1.webp'],
-  },
-};
 
 export default function HomePage() {
   const home = defaultHomeContent;
@@ -51,12 +28,9 @@ export default function HomePage() {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Devastate APK",
-  
-    
     "description": "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
-   
     "author": {
-      "@type": "Organization", // Changed from Person to Organization / Team
+      "@type": "Organization", 
       "name": "Devastate Team",
       "url": `${SITE_URL}/`
     },

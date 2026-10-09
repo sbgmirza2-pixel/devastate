@@ -31,7 +31,7 @@ const siteSettings = {
 };
 
 export function generateMetadata() {
-  const metadataBaseUrl = 'https://devastateapk.net';
+  const metadataBaseUrl = 'https://devastateapk.net/';
 
   return {
     metadataBase: new URL(metadataBaseUrl),
