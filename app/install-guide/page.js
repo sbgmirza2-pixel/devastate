@@ -160,7 +160,7 @@ export default function InstallGuidePage() {
         </div>
       </div>
 
-      {/* How the Gameplay Comes */}
+      {/* How the Gameplay s */}
       <div className="space-y-6 text-black/80 text-base sm:text-lg leading-relaxed mb-12">
         <h2 className="text-3xl font-bold text-black uppercase tracking-wide" style={{ fontFamily: 'var(--font-anton), sans-serif' }}>
           How the Gameplay Comes Together
