@@ -2,7 +2,6 @@ import { Plus_Jakarta_Sans, Roboto } from 'next/font/google';
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
 import GoogleAnalytics from "./components/GoogleAnalytics";
-import JsonLd, { generateWebSiteSchema } from "./components/JsonLd";
 import "./globals.css";
 
 const headingFont = Plus_Jakarta_Sans({
@@ -37,11 +36,9 @@ export function generateMetadata() {
     metadataBase: new URL(metadataBaseUrl),
     title: {
       default: `${siteSettings.siteName} Download for Android - Latest Version`,
-     
     },
     description: siteSettings.siteDescription,
     applicationName: siteSettings.siteName,
-    
     authors: [{ name: 'Devastate Team' }],
     creator: 'Devastate Team',
     publisher: siteSettings.siteName,
@@ -50,14 +47,13 @@ export function generateMetadata() {
       address: false,
       telephone: false,
     },
-   alternates: {
+    alternates: {
       canonical: 'https://devastateapk.net/',
       languages: {
         'en-US': 'https://devastateapk.net/',
         'x-default': 'https://devastateapk.net/',
       },
     },
-    // 👈 UPDATE: Optimized favicon paths
     icons: {
       icon: '/favicon.ico',
       apple: '/favicon.ico',
@@ -112,12 +108,11 @@ export function generateMetadata() {
 
 export default function RootLayout({ children }) {
   const gaId = siteSettings.gaMeasurementId;
-  const webSiteSchema = generateWebSiteSchema(siteSettings);
 
   return (
     <html lang={siteSettings.language} className={`${headingFont.variable} ${roboto.variable}`}>
       <head>
-        <JsonLd data={webSiteSchema} />
+        {/* Layout ka schema yahan se remove kar diya hai taaki page.js ke sath clash ya double na ho */}
       </head>
       <body className="bg-[#D1D5DB] text-[#1F2937] min-h-screen flex flex-col justify-between selection:bg-[#544558] selection:text-white antialiased">
         <GoogleAnalytics gaId={gaId} />
