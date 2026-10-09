@@ -16,34 +16,106 @@ import FinalWords from './components/FinalWords';
 import ScreenshotsPage from './screenshots/page';
 import { defaultHomeContent } from '@/lib/homeDefaults';
 
-// 👈 Yeh line yahan add kar dein taaki schema me URL define rahe
-const SITE_URL = 'https://devastateapk.net/';
+const SITE_URL = 'https://devastateapk.net';
 
 export default function HomePage() {
   const home = defaultHomeContent;
   const apk = {}; 
 
-  // --- COMPREHENSIVE CONTENT SCHEMA (Updated author name to Devastate Team) ---
-  const softwareAppSchema = {
+  // 1. WebSite Schema
+  const webSiteSchema = {
     "@context": "https://schema.org",
     "@type": "WebSite",
     "name": "Devastate APK",
+    "url": `${SITE_URL}/`,
     "description": "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
+    "inLanguage": "en",
+    "publisher": {
+      "@type": "Organization",
+      "name": "Devastate DEV",
+      "url": `${SITE_URL}/`,
+      "logo": {
+        "@type": "ImageObject",
+        "url": `${SITE_URL}/favicon.ico`
+      }
+    }
+  };
+
+  // 2. MobileApplication Schema
+  const mobileAppSchema = {
+    "@context": "https://schema.org",
+    "@type": "MobileApplication",
+    "name": "Devastate APK",
+    "url": `${SITE_URL}/`,
+    "description": "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
+    "applicationCategory": "GameApplication",
+    "operatingSystem": "ANDROID",
+    "image": `${SITE_URL}/pic1.webp`,
+    "downloadUrl": `${SITE_URL}/`,
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.5",
+      "bestRating": "5",
+      "worstRating": "1",
+      "ratingCount": "18995",
+      "reviewCount": "18995"
+    },
+    "offers": {
+      "@type": "Offer",
+      "price": 0,
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    },
     "author": {
-      "@type": "Organization", 
-      "name": "Devastate Team",
+      "@type": "Organization",
+      "name": "Devastate Team"
+    }
+  };
+
+  // 3. WebPage Schema
+  const webPageSchema = {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Devastate APK Download for Android - Anime Simulation Game",
+    "url": `${SITE_URL}/`,
+    "description": "Download Devastate APK v1.0 for Android and enjoy a 2D anime simulation with character stories, dialogue choices, daily tasks, items, coins, and outfits.",
+    "inLanguage": "en",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": `${SITE_URL}/pic1.webp`
+    },
+    "datePublished": "2026-08-05",
+    "dateModified": "2026-08-05",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Devastate APK",
       "url": `${SITE_URL}/`
     },
     "publisher": {
       "@type": "Organization",
-      "name": "Devastate DEV",
-      "logo": {
-        "@type": "ImageObject",
-        "url": `${SITE_URL}/Devastate-fav-icon.webp`
-      }
+      "name": "Devastate DEV"
     },
+    "breadcrumb": {
+      "@id": `${SITE_URL}/#breadcrumb`
+    }
   };
 
+  // 4. BreadcrumbList Schema
+  const breadcrumbSchema = {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "@id": `${SITE_URL}/#breadcrumb`,
+    "itemListElement": [
+      {
+        "@type": "ListItem",
+        "position": 1,
+        "name": "Home",
+        "item": `${SITE_URL}/`
+      }
+    ]
+  };
+
+  // 5. FAQ Schema
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -71,7 +143,19 @@ export default function HomePage() {
     <>
       <script
         type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(softwareAppSchema) }}
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webSiteSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(mobileAppSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(webPageSchema) }}
+      />
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(breadcrumbSchema) }}
       />
       <script
         type="application/ld+json"
