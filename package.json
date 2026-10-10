@@ -2,14 +2,14 @@
   "name": "frontend",
   "version": "0.1.0",
   "private": true,
- "scripts": {
-  "dev": "next dev",
-  "build": "next build",
-  "start": "next start",
-  "lint": "eslint",
-  "pages:build": "npx @cloudflare/next-on-pages",
-  "deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static"
-},
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "eslint",
+    "pages:build": "npx @cloudflare/next-on-pages",
+    "deploy": "npm run pages:build && wrangler pages deploy .vercel/output/static"
+  },
   "dependencies": {
     "@vercel/blob": "^2.8.0",
     "framer-motion": "^13.1.0",
