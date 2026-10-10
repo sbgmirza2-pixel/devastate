@@ -1,4 +1,4 @@
-export const runtime = 'edge';
+
 import { notFound } from 'next/navigation';
 import Link from 'next/link';
 import MarkdownContent from '@/app/components/MarkdownContent';
@@ -1058,6 +1058,7 @@ export async function generateMetadata({ params }) {
     },
   };
 }
+export const runtime = 'edge';
 
 export default async function BlogPostPage({ params }) {
   const { slug } = await params;
